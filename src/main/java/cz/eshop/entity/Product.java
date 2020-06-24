@@ -1,6 +1,7 @@
 package cz.eshop.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +29,10 @@ public class Product implements Serializable {
 
 	@Column(name = "IMAGE_URL")
 	private String imageUrl;
-
+	
+	@Column(name = "PRICE")
+	private BigDecimal price = new BigDecimal(0);
+		
 	public Long getId() {
 		return id;
 	}
@@ -60,5 +64,12 @@ public class Product implements Serializable {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
-
+	
+	public BigDecimal getPrice() {
+		return price;
+	}
+	
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
 }

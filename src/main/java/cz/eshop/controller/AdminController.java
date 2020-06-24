@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import cz.eshop.dto.ActionType;
 import cz.eshop.entity.Product;
 import cz.eshop.service.ProductService;
 
@@ -43,22 +45,52 @@ public class AdminController {
 
 		Product product = productService.loadById(productId);
 		model.addAttribute("product", product);
-
+		model.addAttribute("actionType", ActionType.EDIT);
+		
 		return ADMIN_PATH_PREFIX + "product_admin";
 	}
 
 	/**
 	 * Method handling POST request for updating Product in DB
 	 */
-	@PostMapping("admin/edit_product_{id}")
-	public String updateProduct(
+	@PostMapping(value = "admin/product_administration")
+	public String createUpdateProduct(
 			@ModelAttribute("product") Product product,
 			Model model) {
 
-		productService.update(product);
-
+		if(product.getId() == null) {
+			productService.create(product);
+		}
+		else {
+			productService.update(product);
+		}
+		
 		return "redirect:products";
 
 	}
+	
+	@GetMapping("admin/remove_product_{id}")
+	public String removeProduct(
+			@ModelAttribute("product") Product product,
+			Model model) {
 
+		productService.remove(product);
+
+		return "redirect:products";
+	}
+	
+	@GetMapping("admin/create_product")
+	public String createProduct(Model model) {
+
+		Product product = new Product();
+		model.addAttribute("product", product);
+		model.addAttribute("actionType", ActionType.CREATE);
+		
+		return ADMIN_PATH_PREFIX + "product_admin";
+	}
+	
+
+
+	
+	
 }

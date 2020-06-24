@@ -30,6 +30,7 @@
 					<th><spring:message code="admin.productList.table.th.name" /></th>
 					<th><spring:message code="admin.productList.table.th.description" /></th>
 					<th><spring:message code="admin.productList.table.th.imageUrl" /></th>
+					<th><spring:message code="admin.productList.table.th.price" /></th>
 					<th width="100"></th>
 					<th width="100"></th>
 				</tr>
@@ -42,13 +43,15 @@
 								<td>${product.name}</td>
 								<td>${product.description}</td>
 								<td>${product.imageUrl}</td>
+								<td>${product.price}</td>
+								
 								<td>
 									<a href="<c:url value='edit_product_${product.id}' />" class="btn btn-primary">
 										<spring:message code="admin.productList.table.btn.edit" />
 									</a>
 								</td>
 								<td>
-									<a href="#" class="btn btn-danger">
+									<a href="<c:url value='remove_product_${product.id}' />" class="btn btn-danger">
 										<spring:message code="admin.productList.table.btn.delete" />
 									</a>
 								</td>
@@ -65,7 +68,8 @@
 		</table>
 	</div>
 	<div class="well">
-		<a href="<c:url value='#' />" class="btn btn-success">
+	
+		<a href="<c:url value='create_product' />" class="btn btn-success">
 			<spring:message code="admin.productList.table.btn.create" />
 		</a>
 	</div>

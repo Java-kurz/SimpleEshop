@@ -1,5 +1,5 @@
-INSERT INTO simple_eshop.product(NAME, DESCRIPTION) VALUES
-	('Pomeranc', 'Nahnily pomeranc z Globusu'),
-	('Rajce', 'Nejaky rajce'),
-	('Banan', 'Banan dle norem EU'),
-	('Rybiz', 'Proste rybiz');
+INSERT INTO simple_eshop.product(NAME, DESCRIPTION, PRICE) VALUES
+	('Pomeranc', 'Nahnily pomeranc z Globusu','12'),
+	('Rajce', 'Nejaky rajce', '12'),
+	('Banan', 'Banan dle norem EU', '12'),
+	('Rybiz', 'Proste rybiz', '12');
