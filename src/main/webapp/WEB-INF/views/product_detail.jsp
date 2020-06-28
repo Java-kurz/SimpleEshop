@@ -9,7 +9,7 @@
 <html>
 
 <head>
-	<title>Main page</title>
+	<title>Product detail</title>
 	<link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"></link>
 	<link href="<c:url value='/static/css/stylesheet.css' />" rel="stylesheet"></link>
 </head>
@@ -20,29 +20,23 @@
 
 <div class="main">
 
-	<h2>Tohle je eshop</h2>
+	<h2>Detail produktu ${product.name}</h2>
 	<hr />
 	<div class="row">
-		<c:forEach items="${products}" var="product">
-			<div class="column">
-				<a href="<c:url value='product_detail?id=${product.id}&testParam2=testParam2text' />">
-					<table class="table" style="text-align: center;">
-						<tbody>
-							<tr><td><b>${product.name}</b></td></tr>
-							<tr><td>${product.description}</td></tr>
-							<tr>
-								<td>
-									<img src="<c:url value='/static/images/${product.imageUrl}' />" width="200" />
-								</td>
-							</tr>
-							<tr><td>${product.price} Kč</td></tr>
-						</tbody>
-					</table>
-				</a>
-			</div>
-		</c:forEach>
+		<table class="table" style="text-align: center;">
+			<tbody>
+				<tr><td>${product.description}</td></tr>
+				<tr><td><img src="<c:url value='/static/images/${product.imageUrl}' />" width="400" /></td></tr>
+				<tr><td><h4>${product.price} Kč</h4></td></tr>
+				<tr><td>
+					<a href="" class="btn btn-primary">
+						<spring:message code="productDetail.btn.addToCart" />
+					</a>
+				</td></tr>
+			</tbody>
+		</table>
 	</div>
 </div>
-	
+
 </body>
 </html>

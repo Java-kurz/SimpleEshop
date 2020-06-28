@@ -39,3 +39,16 @@ body {
 		font-size: 18px;
 	}
 }
+
+.column {
+	float: left;
+	width: 33.33%;
+	padding: 25px;
+	height: 400px;
+	text-align: center;
+}
+@media ( max-width : 600px) {
+	.column {
+		width: 100%;
+	}
+}
