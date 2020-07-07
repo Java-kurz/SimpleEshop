@@ -1,6 +1,5 @@
 package cz.eshop.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import cz.eshop.dto.ShoppingCart;
 import cz.eshop.entity.Product;
 import cz.eshop.service.ProductService;
+import cz.eshop.service.ShoppingCartService;
 
 @Controller
 @SessionAttributes("shoppingCart")
@@ -23,11 +23,15 @@ public class MainController {
 	@Autowired
 	ProductService productService;
 
+	@Autowired
+	ShoppingCartService shoppingCartService;
+	
 	@ModelAttribute("shoppingCart")
 	public ShoppingCart shoppingCart() {
 		return new ShoppingCart();
 	}
-
+	
+	
 	/**
 	 * Method returns main page.
 	 */
@@ -47,20 +51,60 @@ public class MainController {
 			@RequestParam("testParam2") String testParam2,
 			Model model) {
 
-		System.out.println(productId);
-		System.out.println(testParam.isPresent() ? testParam.get() : "testParam does not exists");
-		System.out.println(testParam2);
+		//System.out.println(productId);
+		//System.out.println(testParam.isPresent() ? testParam.get() : "testParam does not exists");
+		//System.out.println(testParam2);
 
 		Product product = productService.loadById(productId);
 		model.addAttribute("product", product);
 
-		return "product_detail";
+		return "product_detail"; 
 	}
 
 	@GetMapping("/cart")
-	public String cart(Model model) {
-
+	public String cart(	Model model) {
+		
+		List<Product> products = productService.getList();
+		model.addAttribute("products", products);		
+		
 		return "cart";
 	}
-
+	
+	@GetMapping("/addtocart")
+	public String addToCart(
+			@RequestParam("id") Long productId, 
+			@ModelAttribute("shoppingCart") ShoppingCart shoppingCart,	
+			Model model) {
+		
+				
+		shoppingCartService.addToCart(productId, shoppingCart);
+		model.addAttribute("shoppingCart", shoppingCart);
+										
+		return "cart";
+	}
+	
+	@GetMapping("/removefromcart")
+	public String removeFromCart(
+			@RequestParam("id") Long productId, 
+			@ModelAttribute("shoppingCart") ShoppingCart shoppingCart,	
+			Model model) {
+		
+				
+		shoppingCartService.removeFromCart(productId, shoppingCart);
+		model.addAttribute("shoppingCart", shoppingCart);
+				
+		return "cart";
+	}
+	
+	@GetMapping("/clearcart")
+	public String clearCart(
+			@ModelAttribute("shoppingCart") ShoppingCart shoppingCart,	
+			Model model) {
+		
+				
+		shoppingCartService.clearCart(shoppingCart);
+		model.addAttribute("shoppingCart", shoppingCart);
+				
+		return "cart";
+	}
 }

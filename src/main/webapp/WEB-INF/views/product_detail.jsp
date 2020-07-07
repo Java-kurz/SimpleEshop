@@ -29,7 +29,7 @@
 				<tr><td><img src="<c:url value='/static/images/${product.imageUrl}' />" width="400" /></td></tr>
 				<tr><td><h4>${product.price} Kč</h4></td></tr>
 				<tr><td>
-					<a href="" class="btn btn-primary">
+					<a href="<c:url value='addtocart?id=${product.id}' />" class="btn btn-primary">
 						<spring:message code="productDetail.btn.addToCart" />
 					</a>
 				</td></tr>
