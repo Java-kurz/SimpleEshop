@@ -16,15 +16,15 @@ public class ShoppingCart implements Serializable {
 	private BigDecimal allPrice = new BigDecimal(0);
 
 
-	private Map<Long, Product> productMap = new HashMap<Long, Product>();
+	public Map<Long, ShoppingCartItem> productMap = new HashMap<Long, ShoppingCartItem>();
 	
 	
-	public Map<Long, Product> getProductMap() {
+	public Map<Long, ShoppingCartItem> getProductMap() {
 		return productMap;
 	}
 
 
-	public void setProductMap(Map<Long, Product> productMap) {
+	public void setProductMap(Map<Long, ShoppingCartItem> productMap) {
 		this.productMap = productMap;
 	}
 

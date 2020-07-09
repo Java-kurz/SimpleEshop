@@ -32,6 +32,7 @@ public class MainController {
 	}
 	
 	
+	
 	/**
 	 * Method returns main page.
 	 */
@@ -79,7 +80,7 @@ public class MainController {
 				
 		shoppingCartService.addToCart(productId, shoppingCart);
 		model.addAttribute("shoppingCart", shoppingCart);
-										
+											
 		return "cart";
 	}
 	

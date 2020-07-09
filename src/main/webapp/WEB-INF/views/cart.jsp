@@ -55,7 +55,7 @@
 								width="150" />
 							</td>
 							<td><a href=""> <i class="fa fa-plus" aria-hidden="true"></i>
-							</a> <br /> <br /> <span>3</span> <br /> <br /> <a href=""> <i
+							</a> <br /> <br /> <span>${productMap.value.count}</span> <br /> <br /> <a href=""> <i
 									class="fa fa-minus" aria-hidden="true"></i>
 							</a></td>
 							<td><span>${productMap.value.price}</span></td>
