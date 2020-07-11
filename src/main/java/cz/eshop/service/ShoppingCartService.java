@@ -8,7 +8,8 @@ public interface ShoppingCartService {
 	
 	public void removeFromCart(Long id, ShoppingCart cart);
 	
-	public void clearCart(ShoppingCart cart);
+	public void removeOneFromCart(Long id, ShoppingCart cart);
 	
+	public void clearCart(ShoppingCart cart);
 	
 }

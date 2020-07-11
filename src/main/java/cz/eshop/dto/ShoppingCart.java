@@ -16,7 +16,7 @@ public class ShoppingCart implements Serializable {
 	private BigDecimal allPrice = new BigDecimal(0);
 
 
-	public Map<Long, ShoppingCartItem> productMap = new HashMap<Long, ShoppingCartItem>();
+	private Map<Long, ShoppingCartItem> productMap = new HashMap<Long, ShoppingCartItem>();
 	
 	
 	public Map<Long, ShoppingCartItem> getProductMap() {

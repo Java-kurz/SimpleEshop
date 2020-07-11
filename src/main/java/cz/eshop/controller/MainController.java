@@ -97,6 +97,18 @@ public class MainController {
 		return "cart";
 	}
 	
+	@GetMapping("/removeonefromcart")
+	public String removeOneFromCart(
+			@RequestParam("id") Long productId, 
+			@ModelAttribute("shoppingCart") ShoppingCart shoppingCart,	
+			Model model) {
+		
+				
+		shoppingCartService.removeOneFromCart(productId, shoppingCart);
+		model.addAttribute("shoppingCart", shoppingCart);
+				
+		return "cart";
+	}
 	@GetMapping("/clearcart")
 	public String clearCart(
 			@ModelAttribute("shoppingCart") ShoppingCart shoppingCart,	

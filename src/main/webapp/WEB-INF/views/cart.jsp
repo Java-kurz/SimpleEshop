@@ -54,8 +54,8 @@
 								<img src="<c:url value='/static/images/${productMap.value.imageUrl}' />"
 								width="150" />
 							</td>
-							<td><a href=""> <i class="fa fa-plus" aria-hidden="true"></i>
-							</a> <br /> <br /> <span>${productMap.value.count}</span> <br /> <br /> <a href=""> <i
+							<td><a href="<c:url value='addtocart?id=${productMap.value.id}' />"> <i class="fa fa-plus" aria-hidden="true"></i>
+							</a> <br /> <br /> <span>${productMap.value.count}</span> <br /> <br /> <a href="<c:url value='removeonefromcart?id=${productMap.value.id}' />"> <i
 									class="fa fa-minus" aria-hidden="true"></i>
 							</a></td>
 							<td><span>${productMap.value.price}</span></td>

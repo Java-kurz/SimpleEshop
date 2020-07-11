@@ -23,9 +23,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 		if (cart.getProductMap().containsKey(id)) {
 			cart.getProductMap();
-			
+
 			ShoppingCartItem shoppingCartItem = cart.getProductMap().get(id);
-			shoppingCartItem.setCount();
+			shoppingCartItem.setCount(1);
 		} else {
 			Product product = productService.loadById(id);
 			ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
@@ -33,7 +33,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 			shoppingCartItem.setName(product.getName());
 			shoppingCartItem.setPrice(product.getPrice());
 			shoppingCartItem.setImageUrl(product.getImageUrl());
-			shoppingCartItem.setCount();
+			shoppingCartItem.setCount(1);
 			cart.getProductMap().put(id, shoppingCartItem);
 		}
 		rePrice(cart);
@@ -45,6 +45,19 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		// TODO Auto-generated method stub
 
 		cart.getProductMap().remove(id);
+		rePrice(cart);
+
+	}
+
+	@Override
+	public void removeOneFromCart(Long id, ShoppingCart cart) {
+		// TODO Auto-generated method stub
+
+		ShoppingCartItem shoppingCartItem = cart.getProductMap().get(id);
+		shoppingCartItem.setCount(-1);
+		if (shoppingCartItem.getCount() == 0) {
+			cart.getProductMap().remove(id);
+		}
 		rePrice(cart);
 
 	}
@@ -63,7 +76,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 		for (Long id : cart.getProductMap().keySet()) {
 			ShoppingCartItem shoppingCartItem = cart.getProductMap().get(id);
-			BigDecimal onePrice = shoppingCartItem.getPrice();
+			BigDecimal onePrice = shoppingCartItem.getPrice().multiply(new BigDecimal(shoppingCartItem.getCount()));
 			allPrice = onePrice.add(allPrice);
 
 		}
