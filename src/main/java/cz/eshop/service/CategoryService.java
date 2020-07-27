@@ -2,39 +2,37 @@ package cz.eshop.service;
 
 import java.util.List;
 
-import cz.eshop.entity.Product;
+import cz.eshop.entity.Category;
 
-public interface ProductService {
-
+public interface CategoryService {
 	/**
 	 * Create new Product
 	 * @param product
 	 */
-	public void create(Product product);
+	public void create(Category category);
 
 	/**
 	 * Update new Product
 	 * @param product
 	 */
-	public void update(Product product);
+	public void update(Category category);
 
 	/**
 	 * Remove Product
 	 * @param product
 	 */
-	public void remove(Product product);
+	public void remove(Category category);
 
 	/**
 	 * @return Collection of all Product entities
 	 */
-	public List<Product> getList();
+	public List<Category> getList();
 
 	/**
 	 * @param id
 	 * @return loaded Product entity
 	 */
-	public Product loadById(Long id);
+	public Category loadById(Long id);
 
-	public List<Product> loadByCategory(Long categoryId);
 
 }

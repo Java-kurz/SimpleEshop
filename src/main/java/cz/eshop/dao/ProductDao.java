@@ -20,4 +20,10 @@ public interface ProductDao extends GenericDao<Product> {
 	 */
 	public Product loadById(Long id);
 
+	/**
+	 * @param categoryId
+	 * @return loaded Products entities by category
+	 */
+	public List<Product> loadByCategory(Long categoryId);
+
 }

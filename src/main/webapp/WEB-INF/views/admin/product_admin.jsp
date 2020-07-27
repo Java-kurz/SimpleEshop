@@ -71,6 +71,17 @@
 				</div>				
 			</div>
 			
+			<div class="row">
+				<div class="form-group col-md-12">
+					<label class="col-md-3 control-lable" for="categoryId">
+						<spring:message code="admin.productList.table.th.categoryId" />
+					</label>
+					<div class="col-md-7">
+						<form:input type="text" path="categoryId" id="categoryId" class="form-control input-sm"/>
+					</div>
+				</div>
+			</div>
+			
 			<input type="submit" value="<spring:message code="admin.productAdmin.form.btn.save" />" class="btn btn-success"/> 
 			<a href="<c:url value='products' />" class="btn btn-danger"><spring:message code="admin.productAdmin.form.btn.back" /></a>
 		</form:form>

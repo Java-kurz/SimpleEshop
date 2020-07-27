@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cz.eshop.dto.ActionType;
 import cz.eshop.entity.Product;
 import cz.eshop.service.ProductService;
+import cz.eshop.entity.Category;
+import cz.eshop.service.CategoryService;
 
 @Controller
 public class AdminController {
@@ -22,6 +24,7 @@ public class AdminController {
 
 	@Autowired
 	ProductService productService;
+	CategoryService categoryService;
 
 	/**
 	 * Method loads products and returns Product admin page.
@@ -35,6 +38,18 @@ public class AdminController {
 		return ADMIN_PATH_PREFIX + "products_list";
 	}
 
+	/**
+	 * Method loads products and returns Category admin page.
+	 */
+	@GetMapping("admin/categories")
+	public String category(Model model) {
+
+		List<Category> categories = categoryService.getList();
+		model.addAttribute("categories", categories);
+
+		return ADMIN_PATH_PREFIX + "categories_list";
+	}
+	
 	/**
 	 * Method prepares and returns edit Product form.
 	 */

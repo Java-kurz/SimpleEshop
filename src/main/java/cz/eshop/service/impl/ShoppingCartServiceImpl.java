@@ -22,7 +22,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		// TODO Auto-generated method stub
 
 		if (cart.getProductMap().containsKey(id)) {
-			cart.getProductMap();
+			
 
 			ShoppingCartItem shoppingCartItem = cart.getProductMap().get(id);
 			shoppingCartItem.setCount(1);
@@ -39,7 +39,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		rePrice(cart);
 
 	}
-
+	
 	@Override
 	public void removeFromCart(Long id, ShoppingCart cart) {
 		// TODO Auto-generated method stub
@@ -48,6 +48,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		rePrice(cart);
 
 	}
+	
 
 	@Override
 	public void removeOneFromCart(Long id, ShoppingCart cart) {

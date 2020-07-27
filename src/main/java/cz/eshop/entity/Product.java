@@ -33,6 +33,17 @@ public class Product implements Serializable {
 	@Column(name = "PRICE")
 	private BigDecimal price = new BigDecimal(0);
 		
+	@Column(name = "CATEGORY")
+	private Long categoryId;
+	
+	public Long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
+
 	public Long getId() {
 		return id;
 	}
