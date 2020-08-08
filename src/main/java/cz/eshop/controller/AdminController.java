@@ -24,6 +24,8 @@ public class AdminController {
 
 	@Autowired
 	ProductService productService;
+
+	@Autowired
 	CategoryService categoryService;
 
 	/**
@@ -49,14 +51,12 @@ public class AdminController {
 
 		return ADMIN_PATH_PREFIX + "categories_list";
 	}
-	
+
 	/**
 	 * Method prepares and returns edit Product form.
 	 */
 	@GetMapping("admin/edit_product_{id}")
-	public String editProduct(
-			@PathVariable("id") Long productId, 
-			Model model) {
+	public String editProduct(@PathVariable("id") Long productId, Model model) {
 
 		Product product = productService.loadById(productId);
 		model.addAttribute("product", product);
@@ -69,9 +69,7 @@ public class AdminController {
 	 * Method handling POST request for updating Product in DB
 	 */
 	@PostMapping(value = "admin/product_administration")
-	public String createUpdateProduct(
-			@ModelAttribute("product") Product product, 
-			Model model) {
+	public String createUpdateProduct(@ModelAttribute("product") Product product, Model model) {
 
 		if (product.getId() == null) {
 			productService.create(product);
@@ -83,10 +81,21 @@ public class AdminController {
 
 	}
 
+	@PostMapping(value = "admin/category_administration")
+	public String createUpdateCategory(@ModelAttribute("category") Category category, Model model) {
+
+		if (category.getId() == null) {
+			categoryService.create(category);
+		} else {
+			categoryService.update(category);
+		}
+
+		return "redirect:categories";
+
+	}
+
 	@GetMapping("admin/remove_product_{id}")
-	public String removeProduct(
-			@ModelAttribute("product") Product product, 
-			Model model) {
+	public String removeProduct(@ModelAttribute("product") Product product, Model model) {
 
 		productService.remove(product);
 
@@ -103,4 +112,31 @@ public class AdminController {
 		return ADMIN_PATH_PREFIX + "product_admin";
 	}
 
+	@GetMapping("admin/create_category")
+	public String createCategory(Model model) {
+
+		Category category = new Category();
+		model.addAttribute("category", category);
+		model.addAttribute("actionType", ActionType.CREATE);
+
+		return ADMIN_PATH_PREFIX + "category_admin";
+	}
+
+	@GetMapping("admin/edit_category_{id}")
+	public String editCategory(@PathVariable("id") Long categoryId, Model model) {
+
+		Category category = categoryService.loadById(categoryId);
+		model.addAttribute("category", category);
+		model.addAttribute("actionType", ActionType.EDIT);
+
+		return ADMIN_PATH_PREFIX + "category_admin";
+	}
+	
+	@GetMapping("admin/remove_category_{id}")
+	public String removeCategory(@ModelAttribute("category") Category category, Model model) {
+
+		categoryService.remove(category);
+
+		return "redirect:categories";
+	}
 }

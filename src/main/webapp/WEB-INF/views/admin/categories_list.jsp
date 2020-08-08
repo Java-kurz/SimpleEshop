@@ -19,8 +19,8 @@
 <%@include file="navbar.jsp" %>
 
 <div class="main">
-test
-<%-- 	<div class="panel panel-default">
+
+ 	<div class="panel panel-default">
 
 		<div class="panel-heading">
 			<span class="lead"><spring:message code="admin.categoryList.header" /></span>
@@ -29,7 +29,7 @@ test
 			<thead>
 				<tr>
 					<th><spring:message code="admin.categoryList.table.th.name" /></th>
-					<th><spring:message code="admin.categoryList.table.th.active" /></th>
+					<th><spring:message code="admin.categoryList.table.th.status" /></th>
 					
 					<th width="100"></th>
 					<th width="100"></th>
@@ -41,7 +41,7 @@ test
 						<c:forEach items="${categories}" var="category">
 							<tr>
 								<td>${category.name}</td>
-								<td>${category.active}</td>
+								<td>${category.status ? 'Aktivní' : 'Neaktivní'}</td>
 								<td>
 									<a href="<c:url value='edit_category_${category.id}' />" class="btn btn-primary">
 										<spring:message code="admin.categoryList.table.btn.edit" />
@@ -64,7 +64,7 @@ test
 			</tbody>
 		</table>
 	</div>
-	<div class="well"> --%>
+	<div class="well"> 
 	
 		<a href="<c:url value='create_category' />" class="btn btn-success">
 			<spring:message code="admin.productList.table.btn.create" />
