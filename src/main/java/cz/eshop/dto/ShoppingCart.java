@@ -40,34 +40,6 @@ public class ShoppingCart implements Serializable {
 	
 	
 	
-	
-	
-/*	
-private static HashMap<Long, Integer> Cart;
-	
-	public void addToCart (Long Id) {
-		
-		if (Cart==null) {
-			Cart = new HashMap<Long, Integer>();	
-		}
-			
-		if (Cart.containsKey(Id)) { 
-			int count =(Integer)Cart.get(Id);
-			count++;
-			System.out.println(count);
-			Cart.put(Id, count);
-		}
-		else {
-			Cart.put(Id, 1);
-		}
-				
-		System.out.println(Cart); 
-		}
-	
-	*/
-
-
-
 
 }
 

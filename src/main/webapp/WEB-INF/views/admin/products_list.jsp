@@ -31,7 +31,7 @@
 					<th><spring:message code="admin.productList.table.th.description" /></th>
 					<th><spring:message code="admin.productList.table.th.imageUrl" /></th>
 					<th><spring:message code="admin.productList.table.th.price" /></th>
-					<th><spring:message code="admin.productList.table.th.categoryId" /></th>
+					<th><spring:message code="admin.productList.table.th.categoryName" /></th>
 					<th width="100"></th>
 					<th width="100"></th>
 				</tr>
@@ -45,7 +45,7 @@
 								<td>${product.description}</td>
 								<td>${product.imageUrl}</td>
 								<td>${product.price}</td>
-								<td>${product.categoryId}</td>
+								<td>${product.categoryName}</td>
 								<td>
 									<a href="<c:url value='edit_product_${product.id}' />" class="btn btn-primary">
 										<spring:message code="admin.productList.table.btn.edit" />

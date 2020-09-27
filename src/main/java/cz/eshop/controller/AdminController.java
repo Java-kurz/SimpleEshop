@@ -1,4 +1,4 @@
-package cz.eshop.controller;
+ package cz.eshop.controller;
 
 import java.util.List;
 
@@ -59,7 +59,9 @@ public class AdminController {
 	public String editProduct(@PathVariable("id") Long productId, Model model) {
 
 		Product product = productService.loadById(productId);
+		List<Category> categories = categoryService.getList();
 		model.addAttribute("product", product);
+		model.addAttribute("categories", categories);
 		model.addAttribute("actionType", ActionType.EDIT);
 
 		return ADMIN_PATH_PREFIX + "product_admin";

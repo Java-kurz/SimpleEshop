@@ -1,7 +1,10 @@
 package cz.eshop.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections4.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,8 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Autowired
 	CategoryDao categoryDao;
+	
+	public static final Map<Long, String> categoryMap = new HashMap <Long, String>();
 	
 	@Override
 	public void create(Category category) {
@@ -39,6 +44,31 @@ public class CategoryServiceImpl implements CategoryService {
 	public Category loadById(Long id) {
 		return categoryDao.loadById(id);
 	}
+
+	@Override
+	public Map<Long, String> getCategoryMap() {
+		if(MapUtils.isEmpty(categoryMap)) {
+			fillCategoryMap();
+		}
+		return categoryMap;
+	}
+
+	private void fillCategoryMap() {
+		List<Category> categories = getList();
+		for(final Category category : categories) {
+			System.out.println(category.getStatus());
+			if(category.getStatus() != null) {
+			categoryMap.put(category.getId(), category.getName());
+			}
+		}
+		
+
+		
+	}
+
+	
+	
+	
 
 	
 

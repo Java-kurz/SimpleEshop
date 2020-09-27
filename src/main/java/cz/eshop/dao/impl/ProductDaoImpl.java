@@ -49,15 +49,15 @@ public class ProductDaoImpl extends GenericDaoImpl<Product> implements ProductDa
 	}
 
 	@Override
-	public List<Product> loadByCategory(Long categoryId) {
-		if (categoryId == null) {
+	public List<Product> loadByCategory(String categoryName) {
+		if (categoryName == null) {
 			return null;
 		}
 		final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		final CriteriaQuery<Product> crit = criteriaBuilder.createQuery(Product.class);
 		final Root<Product> products = crit.from(Product.class);
 
-		crit.select(products).where(criteriaBuilder.equal(products.get("categoryId"), categoryId));
+		crit.select(products).where(criteriaBuilder.equal(products.get("categoryName"), categoryName));
 
 		final List<Product> results = findByCriteria(crit);
 		return results;

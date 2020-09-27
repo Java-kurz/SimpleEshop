@@ -73,11 +73,26 @@
 			
 			<div class="row">
 				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="categoryId">
-						<spring:message code="admin.productList.table.th.categoryId" />
+					<label class="col-md-3 control-lable" for="categoryName">
+						<spring:message code="admin.productList.table.th.categoryName" />
 					</label>
 					<div class="col-md-7">
-						<form:input type="text" path="categoryId" id="categoryId" class="form-control input-sm"/>
+						
+						
+    					<form:select path="categoryName" id="categoryName" class="form-control input-sm">
+        				<c:forEach items="${categories}" var="category">
+            				<c:choose>
+            					<c:when test= "${category.name eq product.categoryName}">
+            						<option value="${category.name}"selected>${category.name}</option>
+            					</c:when>
+            					<c:otherwise>
+            						<option value="${category.name}">${category.name}</option>
+            					</c:otherwise>
+            				</c:choose>
+        				</c:forEach>
+    					</form:select> 
+    					    					    						
+    					
 					</div>
 				</div>
 			</div>

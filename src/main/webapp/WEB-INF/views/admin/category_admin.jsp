@@ -44,7 +44,7 @@
 						<spring:message code="admin.categoryList.table.th.active" />
 					</label>
 					<div class="col-md-7">
-						<input type="checkbox" name="status" id="status" />
+						<input type="checkbox" name="status" id="status" ${category.status == 'True' ? 'checked' : ''}/>
 					</div>
 				</div>
 			</div>

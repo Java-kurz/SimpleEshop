@@ -35,6 +35,6 @@ public interface ProductService {
 	 */
 	public Product loadById(Long id);
 
-	public List<Product> loadByCategory(Long categoryId);
+	public List<Product> loadByCategory(String categoryName);
 
 }

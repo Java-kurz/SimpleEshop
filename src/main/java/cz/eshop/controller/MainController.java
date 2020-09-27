@@ -1,6 +1,7 @@
 package cz.eshop.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,19 +13,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import cz.eshop.dto.ShoppingCart;
+import cz.eshop.entity.Category;
 import cz.eshop.entity.Product;
+import cz.eshop.service.CategoryService;
 import cz.eshop.service.ProductService;
 import cz.eshop.service.ShoppingCartService;
 
 @Controller
-@SessionAttributes("shoppingCart")
-public class MainController {
+@SessionAttributes({"shoppingCart"})
 
+public class MainController {
+	
 	@Autowired
 	ProductService productService;
 
 	@Autowired
 	ShoppingCartService shoppingCartService;
+
+	@Autowired
+	CategoryService categoryService;
 
 	@ModelAttribute("shoppingCart")
 	public ShoppingCart shoppingCart() {
@@ -35,17 +42,23 @@ public class MainController {
 	 * Method returns main page.
 	 */
 
-	@GetMapping({ "/", "/index", "/ovoce", "/zelenina" })
-	public String index(Model model, @RequestParam(required = false) Long categoryId) {
+	@GetMapping({ "/", "/index", "/category" })
+	public String index(Model model, @RequestParam(value = "name", required = false) String categoryName) {
 
-		if (categoryId != null) {
-			List<Product> products = productService.loadByCategory(categoryId);
+		
+		if (categoryName != null) {
+			List<Product> products = productService.loadByCategory(categoryName);
 			model.addAttribute("products", products);
 		} else {
 			List<Product> products = productService.getList();
 			model.addAttribute("products", products);
 		}
-
+		
+		Map<Long, String> categoryMap =categoryService.getCategoryMap();
+		model.addAttribute("categoryMap", categoryMap);
+		System.out.println(categoryMap.size());
+			
+		
 		return "index";
 	}
 

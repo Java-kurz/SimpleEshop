@@ -24,6 +24,6 @@ public interface ProductDao extends GenericDao<Product> {
 	 * @param categoryId
 	 * @return loaded Products entities by category
 	 */
-	public List<Product> loadByCategory(Long categoryId);
+	public List<Product> loadByCategory(String categoryName);
 
 }
