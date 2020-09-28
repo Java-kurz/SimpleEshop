@@ -86,6 +86,9 @@ public class AdminController {
 	@PostMapping(value = "admin/category_administration")
 	public String createUpdateCategory(@ModelAttribute("category") Category category, Model model) {
 
+		if (category.getStatus() == null) {
+			category.setStatus(Boolean.FALSE);
+		}
 		if (category.getId() == null) {
 			categoryService.create(category);
 		} else {

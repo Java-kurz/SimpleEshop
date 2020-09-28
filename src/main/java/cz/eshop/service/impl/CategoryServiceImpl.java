@@ -14,25 +14,28 @@ import cz.eshop.service.CategoryService;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
-	
+
 	@Autowired
 	CategoryDao categoryDao;
-	
-	public static final Map<Long, String> categoryMap = new HashMap <Long, String>();
-	
+
+	public static final Map<Long, String> categoryMap = new HashMap<Long, String>();
+
 	@Override
 	public void create(Category category) {
 		categoryDao.create(category);
+		refreshCategoryMap();
 	}
 
 	@Override
 	public void update(Category category) {
 		categoryDao.update(category);
+		refreshCategoryMap();
 	}
 
 	@Override
 	public void remove(Category category) {
 		categoryDao.remove(category);
+		refreshCategoryMap();
 	}
 
 	@Override
@@ -47,7 +50,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public Map<Long, String> getCategoryMap() {
-		if(MapUtils.isEmpty(categoryMap)) {
+		if (MapUtils.isEmpty(categoryMap)) {
 			fillCategoryMap();
 		}
 		return categoryMap;
@@ -55,21 +58,17 @@ public class CategoryServiceImpl implements CategoryService {
 
 	private void fillCategoryMap() {
 		List<Category> categories = getList();
-		for(final Category category : categories) {
+		for (final Category category : categories) {
 			System.out.println(category.getStatus());
-			if(category.getStatus() != null) {
-			categoryMap.put(category.getId(), category.getName());
+			if (Boolean.TRUE == category.getStatus()) {
+				categoryMap.put(category.getId(), category.getName());
 			}
 		}
-		
-
-		
 	}
 
-	
-	
-	
-
-	
+	private void refreshCategoryMap() {
+		categoryMap.clear();
+		fillCategoryMap();
+	}
 
 }
