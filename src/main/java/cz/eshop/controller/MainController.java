@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import cz.eshop.dto.ProductAdminDetailModel;
 import cz.eshop.dto.ShoppingCart;
-import cz.eshop.entity.Category;
 import cz.eshop.entity.Product;
 import cz.eshop.service.CategoryService;
 import cz.eshop.service.ProductService;
@@ -33,6 +33,8 @@ public class MainController {
 	@Autowired
 	CategoryService categoryService;
 
+		 
+	
 	@ModelAttribute("shoppingCart")
 	public ShoppingCart shoppingCart() {
 		return new ShoppingCart();
@@ -45,7 +47,6 @@ public class MainController {
 	@GetMapping({ "/", "/index", "/category" })
 	public String index(Model model, @RequestParam(value = "name", required = false) String categoryName) {
 
-		
 		if (categoryName != null) {
 			List<Product> products = productService.loadByCategory(categoryName);
 			model.addAttribute("products", products);
@@ -56,8 +57,7 @@ public class MainController {
 		
 		Map<Long, String> categoryMap =categoryService.getCategoryMap();
 		model.addAttribute("categoryMap", categoryMap);
-		System.out.println(categoryMap.size());
-			
+				
 		
 		return "index";
 	}
@@ -67,13 +67,13 @@ public class MainController {
 			@RequestParam("testParam") Optional<String> testParam, @RequestParam("testParam2") String testParam2,
 			Model model) {
 
-		// System.out.println(productId);
-		// System.out.println(testParam.isPresent() ? testParam.get() : "testParam does
-		// not exists");
-		// System.out.println(testParam2);
+		System.out.println(productId);
+		System.out.println(testParam.isPresent() ? testParam.get() : "testParam does not exists");
+		System.out.println(testParam2);
 
-		Product product = productService.loadById(productId);
-		model.addAttribute("product", product);
+		productService.productDetail(model,productId);
+		
+		
 
 		return "product_detail";
 	}

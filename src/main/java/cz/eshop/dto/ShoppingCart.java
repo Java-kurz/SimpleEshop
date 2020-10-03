@@ -5,8 +5,6 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-import cz.eshop.entity.Product;
-
 
 public class ShoppingCart implements Serializable {
 

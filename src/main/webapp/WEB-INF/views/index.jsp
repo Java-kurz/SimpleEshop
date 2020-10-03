@@ -25,7 +25,7 @@
 	<div class="row">
 		<c:forEach items="${products}" var="product">
 			<div class="column">
-				<a href="<c:url value='product_detail?id=${product.id}&testParam2=testParam2text' />">
+				<a href="<c:url value='product_detail?id=${product.id}&testParam=A&testParam2=B' />">
 					<table class="table" style="text-align: center;">
 						<tbody>
 							<tr><td><b>${product.name}</b></td></tr>

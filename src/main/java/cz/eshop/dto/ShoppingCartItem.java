@@ -45,8 +45,8 @@ public class ShoppingCartItem implements Serializable {
 		return count;
 	}
 
-	public void setCount(int i) {
-		this.count = count+i;
+	public void setCount() {
+		this.count = count;
 	}
 
 	public String getName() {
@@ -57,4 +57,8 @@ public class ShoppingCartItem implements Serializable {
 		this.name = name;
 	}
 
+	public void changeCount(int i) {
+		this.count = count+i;
+	}
+	
 }

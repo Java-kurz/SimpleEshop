@@ -1,12 +1,13 @@
 package cz.eshop.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import cz.eshop.dao.ProductDao;
+import cz.eshop.dto.ProductAdminDetailModel;
 import cz.eshop.entity.Product;
 import cz.eshop.service.ProductService;
 
@@ -15,6 +16,9 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	ProductDao productDao;
+	
+	@Autowired
+	ProductAdminDetailModel productAdminDetailModel;
 
 	@Override
 	public void create(Product product) {
@@ -47,4 +51,9 @@ public class ProductServiceImpl implements ProductService {
 		
 	}
 
+	@Override
+	public Model productDetail(Model model, Long productId) {
+		return productAdminDetailModel.productDetail(model, productId);
+		
+	}
 }
