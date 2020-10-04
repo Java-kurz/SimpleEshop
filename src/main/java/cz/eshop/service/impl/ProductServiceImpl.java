@@ -52,8 +52,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Model productDetail(Model model, Long productId) {
-		return productAdminDetailModel.productDetail(model, productId);
+	public Model productDetail1(Model model, Long productId) {
+		return productAdminDetailModel.productDetail1(model, productId);
 		
 	}
 }

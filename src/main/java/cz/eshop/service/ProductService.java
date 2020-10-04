@@ -40,6 +40,6 @@ public interface ProductService {
 
 	public List<Product> loadByCategory(String categoryName);
 
-	public Model productDetail(Model model, Long productId);
+	public Model productDetail1(Model model, Long productId);
 
 }

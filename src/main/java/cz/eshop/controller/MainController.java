@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import cz.eshop.dto.ProductAdminDetailModel;
 import cz.eshop.dto.ShoppingCart;
 import cz.eshop.entity.Product;
 import cz.eshop.service.CategoryService;
@@ -71,7 +70,7 @@ public class MainController {
 		System.out.println(testParam.isPresent() ? testParam.get() : "testParam does not exists");
 		System.out.println(testParam2);
 
-		productService.productDetail(model,productId);
+		productService.productDetail1(model,productId);
 		
 		
 
