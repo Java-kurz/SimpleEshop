@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import cz.eshop.dto.ShoppingCart;
+import cz.eshop.entity.Order;
 import cz.eshop.entity.Product;
 import cz.eshop.service.CategoryService;
 import cz.eshop.service.ProductService;
@@ -32,8 +34,6 @@ public class MainController {
 	@Autowired
 	CategoryService categoryService;
 
-		 
-	
 	@ModelAttribute("shoppingCart")
 	public ShoppingCart shoppingCart() {
 		return new ShoppingCart();
@@ -66,14 +66,15 @@ public class MainController {
 			@RequestParam("testParam") Optional<String> testParam, @RequestParam("testParam2") String testParam2,
 			Model model) {
 
-		System.out.println(productId);
-		System.out.println(testParam.isPresent() ? testParam.get() : "testParam does not exists");
-		System.out.println(testParam2);
+		/*
+		 * System.out.println(productId); System.out.println(testParam.isPresent() ?
+		 * testParam.get() : "testParam does not exists");
+		 * System.out.println(testParam2);
+		 */
 
-		productService.productDetail1(model,productId);
-		
-		
-
+		Product product = productService.loadById(productId);
+		model.addAttribute("product", product);
+				
 		return "product_detail";
 	}
 
@@ -115,6 +116,26 @@ public class MainController {
 
 		shoppingCartService.clearCart(shoppingCart);
 
+		return "cart";
+	}
+	
+	@GetMapping("/customer")
+	public String customer(Model model) {
+
+		model.addAttribute("checkOutModel", shoppingCartService.createCustomerModel());
+		
+		return "customer";
+	}
+	
+	@PostMapping(value = "customer_administration")
+	public String createCustomer(@ModelAttribute("checkOutModel") Order order, Model model) {
+
+		
+		shoppingCartService.createCustomer(order);
+		System.out.println(order.getId());
+		System.out.println(order.getName());
+		System.out.println(order.getEmail());
+		
 		return "cart";
 	}
 }

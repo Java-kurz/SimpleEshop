@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import cz.eshop.dao.ProductDao;
 import cz.eshop.dto.ProductAdminDetailModel;
+import cz.eshop.entity.Category;
 import cz.eshop.entity.Product;
+import cz.eshop.service.CategoryService;
 import cz.eshop.service.ProductService;
 
 @Service
@@ -16,9 +17,9 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	ProductDao productDao;
-	
+
 	@Autowired
-	ProductAdminDetailModel productAdminDetailModel;
+	CategoryService categoryService;
 
 	@Override
 	public void create(Product product) {
@@ -48,12 +49,29 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> loadByCategory(String categoryName) {
 		return productDao.loadByCategory(categoryName);
-		
+
 	}
 
 	@Override
-	public Model productDetail1(Model model, Long productId) {
-		return productAdminDetailModel.productDetail1(model, productId);
-		
+	public ProductAdminDetailModel editCreateProduct(Long productId) {
+
+		ProductAdminDetailModel productAdminDetailModel = new ProductAdminDetailModel();
+
+		if (productId != null) {
+
+			Product product = this.loadById(productId);
+			productAdminDetailModel.setId(product.getId());
+			productAdminDetailModel.setName(product.getName());
+			productAdminDetailModel.setDescription(product.getDescription());
+			productAdminDetailModel.setPrice(product.getPrice());
+			productAdminDetailModel.setImageUrl(product.getImageUrl());
+			productAdminDetailModel.setcategoryName(product.getCategoryName());
+		}
+
+		List<Category> categories = categoryService.getList();
+		productAdminDetailModel.setCategories(categories);
+
+		return productAdminDetailModel;
+
 	}
 }

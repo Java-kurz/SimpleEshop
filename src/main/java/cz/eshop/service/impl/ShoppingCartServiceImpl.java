@@ -5,17 +5,24 @@ import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cz.eshop.dto.CheckOutModel;
 import cz.eshop.dto.ShoppingCart;
 import cz.eshop.dto.ShoppingCartItem;
+import cz.eshop.entity.Order;
 import cz.eshop.entity.Product;
 import cz.eshop.service.ProductService;
 import cz.eshop.service.ShoppingCartService;
+import cz.eshop.dao.OrderDao;
+
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 	@Autowired
 	ProductService productService;
+	
+	@Autowired
+	OrderDao orderDao;
 
 	@Override
 	public void addToCart(Long id, ShoppingCart cart) {
@@ -82,6 +89,17 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 		}
 		cart.setAllPrice(allPrice);
+	}
+	
+	public CheckOutModel createCustomerModel() {
+		
+		CheckOutModel checkOutModel= new CheckOutModel();
+						
+		return checkOutModel;
+	}
+	
+	public void createCustomer(Order order) {
+		orderDao.create(order);
 	}
 
 }

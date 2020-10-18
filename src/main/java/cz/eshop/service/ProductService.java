@@ -2,10 +2,8 @@ package cz.eshop.service;
 
 import java.util.List;
 
-import org.springframework.ui.Model;
-
-import cz.eshop.entity.Product;
 import cz.eshop.dto.ProductAdminDetailModel;
+import cz.eshop.entity.Product;
 
 public interface ProductService {
 
@@ -40,6 +38,6 @@ public interface ProductService {
 
 	public List<Product> loadByCategory(String categoryName);
 
-	public Model productDetail1(Model model, Long productId);
+	public ProductAdminDetailModel editCreateProduct(Long productId);
 
 }

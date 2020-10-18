@@ -59,7 +59,6 @@ public class CategoryServiceImpl implements CategoryService {
 	private void fillCategoryMap() {
 		List<Category> categories = getList();
 		for (final Category category : categories) {
-			System.out.println(category.getStatus());
 			if (Boolean.TRUE == category.getStatus()) {
 				categoryMap.put(category.getId(), category.getName());
 			}

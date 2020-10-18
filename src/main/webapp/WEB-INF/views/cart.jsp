@@ -80,10 +80,12 @@
 		</tr>
 		</table>
 
-		<div align="center">
+		
 			<a href="<c:url value='clearcart' />" class="btn btn-danger">Vyprázdnit košík</a>
-		</div>
-
+		
+			<a href="<c:url value='customer' />" class="btn btn-success">Pokračovat v objednávce</a>
+		
+		
 	</div>
 
 </body>

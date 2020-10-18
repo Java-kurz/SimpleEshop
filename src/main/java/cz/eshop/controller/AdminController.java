@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import cz.eshop.dto.ActionType;
-import cz.eshop.entity.Product;
-import cz.eshop.service.ProductService;
 import cz.eshop.entity.Category;
+import cz.eshop.entity.Product;
 import cz.eshop.service.CategoryService;
+import cz.eshop.service.ProductService;
 
 @Controller
 public class AdminController {
@@ -58,15 +57,15 @@ public class AdminController {
 	@GetMapping("admin/edit_product_{id}")
 	public String editProduct(@PathVariable("id") Long productId, Model model) {
 
-		Product product = productService.loadById(productId);
-		List<Category> categories = categoryService.getList();
-		model.addAttribute("product", product);
-		model.addAttribute("categories", categories);
+		
+		model.addAttribute("productAdminDetailModel", productService.editCreateProduct(productId));
 		model.addAttribute("actionType", ActionType.EDIT);
 
 		return ADMIN_PATH_PREFIX + "product_admin";
 	}
 
+	
+	
 	/**
 	 * Method handling POST request for updating Product in DB
 	 */
@@ -110,8 +109,7 @@ public class AdminController {
 	@GetMapping("admin/create_product")
 	public String createProduct(Model model) {
 
-		Product product = new Product();
-		model.addAttribute("product", product);
+		model.addAttribute("productAdminDetailModel", productService.editCreateProduct(null));
 		model.addAttribute("actionType", ActionType.CREATE);
 
 		return ADMIN_PATH_PREFIX + "product_admin";
