@@ -11,7 +11,7 @@ public class CheckOutModel implements Serializable {
 
 	private String name;
 
-	private String address;
+	private String street;
 
 	private String city;
 	
@@ -37,12 +37,12 @@ public class CheckOutModel implements Serializable {
 		this.name = name;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getStreet() {
+		return street;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setStreet(String street) {
+		this.street = street;
 	}
 
 	public String getCity() {

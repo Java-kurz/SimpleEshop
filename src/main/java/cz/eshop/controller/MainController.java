@@ -21,10 +21,10 @@ import cz.eshop.service.ProductService;
 import cz.eshop.service.ShoppingCartService;
 
 @Controller
-@SessionAttributes({"shoppingCart"})
+@SessionAttributes({ "shoppingCart" })
 
 public class MainController {
-	
+
 	@Autowired
 	ProductService productService;
 
@@ -53,11 +53,10 @@ public class MainController {
 			List<Product> products = productService.getList();
 			model.addAttribute("products", products);
 		}
-		
-		Map<Long, String> categoryMap =categoryService.getCategoryMap();
+
+		Map<Long, String> categoryMap = categoryService.getCategoryMap();
 		model.addAttribute("categoryMap", categoryMap);
-				
-		
+
 		return "index";
 	}
 
@@ -74,7 +73,7 @@ public class MainController {
 
 		Product product = productService.loadById(productId);
 		model.addAttribute("product", product);
-				
+
 		return "product_detail";
 	}
 
@@ -118,24 +117,22 @@ public class MainController {
 
 		return "cart";
 	}
-	
+
 	@GetMapping("/customer")
 	public String customer(Model model) {
 
 		model.addAttribute("checkOutModel", shoppingCartService.createCustomerModel());
-		
+
 		return "customer";
 	}
-	
+
 	@PostMapping(value = "customer_administration")
-	public String createCustomer(@ModelAttribute("checkOutModel") Order order, Model model) {
+	public String createCustomer(@ModelAttribute("checkOutModel") Order order, ShoppingCart shoppingCart, Model model) {
 
 		
-		shoppingCartService.createCustomer(order);
-		System.out.println(order.getId());
-		System.out.println(order.getName());
-		System.out.println(order.getEmail());
-		
+		shoppingCartService.createCustomer(order, shoppingCart);
+			
+			
 		return "cart";
 	}
 }

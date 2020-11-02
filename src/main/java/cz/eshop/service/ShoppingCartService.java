@@ -16,6 +16,8 @@ public interface ShoppingCartService {
 	
 	public CheckOutModel createCustomerModel();
 	
-	public void createCustomer(Order order);
+	public void createCustomer(Order order, ShoppingCart cart);
+	
+	
 	
 }

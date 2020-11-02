@@ -1,24 +1,30 @@
 package cz.eshop.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "`ORDER`")
+@Table(name="ORDER_CUSTOMER")
 public class Order implements Serializable {
 
 	private static final long serialVersionUID = 7085344880847348941L;
 
 	@Id
-	@Column(name = "ID")
+	@Column(name = "ORDER_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long orderId;
 
 	@Column(name = "NAME")
 	private String name;
@@ -38,12 +44,16 @@ public class Order implements Serializable {
 	@Column(name = "EMAIL")
 	private String email;
 
-	public Long getId() {
-		return id;
+	@OneToMany 
+	private Set <OrderItem> orderItems = new HashSet<OrderItem>();
+	
+	
+	public Long getOrderId() {
+		return orderId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
 	}
 
 	public String getName() {
@@ -53,7 +63,7 @@ public class Order implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	public String getStreet() {
 		return street;
 	}
@@ -92,6 +102,14 @@ public class Order implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public Set<OrderItem> getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(Set<OrderItem> orderItems) {
+		this.orderItems = orderItems;
 	}
 	
 	

@@ -25,7 +25,7 @@
 
 
 		<form:form action="customer_administration" method="POST" modelAttribute="checkOutModel" class="form-horizontal">
-			<form:input type="hidden" path="id" id="id"/>
+			<form:input type="hidden" path="orderId" id="orderId"/>
 
 			<div class="row">
 				<div class="form-group col-md-12">
@@ -40,11 +40,11 @@
 			
 			<div class="row">
 				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="address">
-						<spring:message code="customer.address" />
+					<label class="col-md-3 control-lable" for="street	">
+						<spring:message code="customer.street" />
 					</label>
 					<div class="col-md-7">
-						<form:input type="text" path="address" id="address" class="form-control input-sm"/>
+						<form:input type="text" path="street" id="street" class="form-control input-sm"/>
 					</div>
 				</div>
 			</div>

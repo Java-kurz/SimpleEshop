@@ -21,11 +21,9 @@ public class ShoppingCart implements Serializable {
 		return productMap;
 	}
 
-
 	public void setProductMap(Map<Long, ShoppingCartItem> productMap) {
 		this.productMap = productMap;
 	}
-
 
 	public BigDecimal getAllPrice() {
 		return allPrice;

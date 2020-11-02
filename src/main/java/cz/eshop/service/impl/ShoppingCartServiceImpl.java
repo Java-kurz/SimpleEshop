@@ -1,26 +1,27 @@
 package cz.eshop.service.impl;
 
 import java.math.BigDecimal;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cz.eshop.dao.OrderDao;
 import cz.eshop.dto.CheckOutModel;
 import cz.eshop.dto.ShoppingCart;
 import cz.eshop.dto.ShoppingCartItem;
 import cz.eshop.entity.Order;
+import cz.eshop.entity.OrderItem;
 import cz.eshop.entity.Product;
 import cz.eshop.service.ProductService;
 import cz.eshop.service.ShoppingCartService;
-import cz.eshop.dao.OrderDao;
-
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 	@Autowired
 	ProductService productService;
-	
+
 	@Autowired
 	OrderDao orderDao;
 
@@ -29,7 +30,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		// TODO Auto-generated method stub
 
 		if (cart.getProductMap().containsKey(id)) {
-			
 
 			ShoppingCartItem shoppingCartItem = cart.getProductMap().get(id);
 			shoppingCartItem.changeCount(1);
@@ -46,7 +46,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		rePrice(cart);
 
 	}
-	
+
 	@Override
 	public void removeFromCart(Long id, ShoppingCart cart) {
 		// TODO Auto-generated method stub
@@ -55,7 +55,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		rePrice(cart);
 
 	}
-	
 
 	@Override
 	public void removeOneFromCart(Long id, ShoppingCart cart) {
@@ -90,16 +89,33 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		}
 		cart.setAllPrice(allPrice);
 	}
-	
+
 	public CheckOutModel createCustomerModel() {
-		
-		CheckOutModel checkOutModel= new CheckOutModel();
-						
+
+		CheckOutModel checkOutModel = new CheckOutModel();
+
 		return checkOutModel;
 	}
-	
-	public void createCustomer(Order order) {
-		orderDao.create(order);
-	}
 
+	public void createCustomer(Order order, ShoppingCart cart) {
+
+		for (Long id : cart.getProductMap().keySet()) {
+			ShoppingCartItem shoppingCartItem = cart.getProductMap().get(id);
+			OrderItem orderItem = new OrderItem();
+			order.getOrderItems().add(orderItem);
+
+			System.out.println(shoppingCartItem.getCount());
+			System.out.println(shoppingCartItem.getId());
+
+			orderDao.create(order);
+
+		}
+
+		/*
+		 * for (Map.Entry<Long, ShoppingCartItem> entry :
+		 * cart.getProductMap().entrySet()) { System.out.println("[Key] : " +
+		 * entry.getKey() + " [Value] : " + entry.getValue(cart.get(entry.getKey()))); }
+		 */
+
+	}
 }
