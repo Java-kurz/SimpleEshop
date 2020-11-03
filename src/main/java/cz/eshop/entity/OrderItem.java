@@ -8,7 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -25,13 +24,12 @@ public class OrderItem implements Serializable {
 
     @Column(name = "QUANTITY")
 	private int quantity;
-
-    @ManyToOne
-    @JoinColumn(name="ORDER_ID")
-    private Order order;
-        
     
-    private Long productId;
+    @ManyToOne(fetch = FetchType.LAZY)
+	private Order order;
+
+	
+	private Long productId;
     
     public Long getId() {
 		return id;

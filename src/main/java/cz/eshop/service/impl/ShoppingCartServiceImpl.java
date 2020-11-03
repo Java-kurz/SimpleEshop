@@ -102,15 +102,17 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		for (Long id : cart.getProductMap().keySet()) {
 			ShoppingCartItem shoppingCartItem = cart.getProductMap().get(id);
 			OrderItem orderItem = new OrderItem();
+			orderItem.setQuantity(shoppingCartItem.getCount());
+			orderItem.setProductId(shoppingCartItem.getId());
 			order.getOrderItems().add(orderItem);
 
 			System.out.println(shoppingCartItem.getCount());
 			System.out.println(shoppingCartItem.getId());
 
-			orderDao.create(order);
+			
 
 		}
-
+		orderDao.create(order);
 		/*
 		 * for (Map.Entry<Long, ShoppingCartItem> entry :
 		 * cart.getProductMap().entrySet()) { System.out.println("[Key] : " +

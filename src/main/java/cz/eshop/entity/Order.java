@@ -4,19 +4,18 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ORDER_CUSTOMER")
+@Table(name = "ORDER_CUSTOMER")
 public class Order implements Serializable {
 
 	private static final long serialVersionUID = 7085344880847348941L;
@@ -34,20 +33,20 @@ public class Order implements Serializable {
 
 	@Column(name = "CITY")
 	private String city;
-	
+
 	@Column(name = "PSC")
 	private String psc;
-		
+
 	@Column(name = "PHONE")
 	private Long phone;
 
 	@Column(name = "EMAIL")
 	private String email;
 
-	@OneToMany 
-	private Set <OrderItem> orderItems = new HashSet<OrderItem>();
-	
-	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "ORDER_ID")
+	private Set<OrderItem> orderItems = new HashSet<OrderItem>();
+
 	public Long getOrderId() {
 		return orderId;
 	}
@@ -63,7 +62,7 @@ public class Order implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public String getStreet() {
 		return street;
 	}
@@ -103,7 +102,7 @@ public class Order implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public Set<OrderItem> getOrderItems() {
 		return orderItems;
 	}
@@ -111,8 +110,5 @@ public class Order implements Serializable {
 	public void setOrderItems(Set<OrderItem> orderItems) {
 		this.orderItems = orderItems;
 	}
-	
-	
-
 
 }
