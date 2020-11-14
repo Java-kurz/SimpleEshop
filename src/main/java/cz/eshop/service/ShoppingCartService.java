@@ -1,8 +1,6 @@
 package cz.eshop.service;
 
-import cz.eshop.dto.CheckOutModel;
 import cz.eshop.dto.ShoppingCart;
-import cz.eshop.entity.Order;
 
 public interface ShoppingCartService {
 
@@ -14,9 +12,6 @@ public interface ShoppingCartService {
 	
 	public void clearCart(ShoppingCart cart);
 	
-	public CheckOutModel createCustomerModel();
-	
-	public void createCustomer(Order order, ShoppingCart cart);
 	
 	
 	

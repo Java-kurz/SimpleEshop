@@ -21,16 +21,16 @@
 <div class="main">
 
 
- <div class="well lead"><spring:message code="customer.header" /></div>
+ <div class="well lead"><spring:message code="order.header" /></div>
 
 
-		<form:form action="customer_administration" method="POST" modelAttribute="checkOutModel" class="form-horizontal">
-			<form:input type="hidden" path="orderId" id="orderId"/>
+		<form:form action="createorder" method="POST" modelAttribute="checkOutModel" class="form-horizontal">
+			<form:input type="hidden" path="id" id="id"/>
 
 			<div class="row">
 				<div class="form-group col-md-12">
 					<label class="col-md-3 control-lable" for="name">
-						<spring:message code="customer.name" />
+						<spring:message code="order.name" />
 					</label>
 					<div class="col-md-7">
 						<form:input type="text" path="name" id="name" class="form-control input-sm"/>
@@ -41,7 +41,7 @@
 			<div class="row">
 				<div class="form-group col-md-12">
 					<label class="col-md-3 control-lable" for="street	">
-						<spring:message code="customer.street" />
+						<spring:message code="order.street" />
 					</label>
 					<div class="col-md-7">
 						<form:input type="text" path="street" id="street" class="form-control input-sm"/>
@@ -52,7 +52,7 @@
 			<div class="row">
 				<div class="form-group col-md-12">
 					<label class="col-md-3 control-lable" for="city">
-						<spring:message code="customer.city" />
+						<spring:message code="order.city" />
 					</label>
 					<div class="col-md-7">
 						<form:input type="text" path="city" id="city" class="form-control input-sm"/>
@@ -63,7 +63,7 @@
 			<div class="row">
 				<div class="form-group col-md-12">
 					<label class="col-md-3 control-lable" for="psc">
-						<spring:message code="customer.psc" />
+						<spring:message code="order.psc" />
 					</label>
 					<div class="col-md-7">
 						<form:input type="text" path="psc" id="psc" class="form-control input-sm"/>
@@ -74,7 +74,7 @@
 			<div class="row">
 				<div class="form-group col-md-12">
 					<label class="col-md-3 control-lable" for="phone">
-						<spring:message code="customer.phone" />
+						<spring:message code="order.phone" />
 					</label>
 					<div class="col-md-7">
 						<form:input type="text" path="phone" id="phone" class="form-control input-sm"/>
@@ -85,7 +85,7 @@
 			<div class="row">
 				<div class="form-group col-md-12">
 					<label class="col-md-3 control-lable" for="email">
-						<spring:message code="customer.email" />
+						<spring:message code="order.email" />
 					</label>
 					<div class="col-md-7">
 						<form:input type="text" path="email" id="email" class="form-control input-sm"/>

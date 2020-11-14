@@ -7,7 +7,7 @@ public class CheckOutModel implements Serializable {
 
 	private static final long serialVersionUID = -4319480662768232958L;
 
-	private Long OrderId;
+	private Long id;
 
 	private String name;
 
@@ -21,12 +21,12 @@ public class CheckOutModel implements Serializable {
 
 	private String email;
 
-	public Long getOrderId() {
-		return OrderId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setOrderId(Long orderId) {
-		OrderId = orderId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {

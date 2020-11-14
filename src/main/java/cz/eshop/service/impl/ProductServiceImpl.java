@@ -40,15 +40,15 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> getList() {
 		return productDao.getList();
 	}
-
+	
 	@Override
 	public Product loadById(Long id) {
 		return productDao.loadById(id);
 	}
 
 	@Override
-	public List<Product> loadByCategory(String categoryName) {
-		return productDao.loadByCategory(categoryName);
+	public List<Product> loadByCategory(Long categoryId) {
+		return productDao.loadByCategory(categoryId);
 
 	}
 

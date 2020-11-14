@@ -15,7 +15,7 @@
 					<c:when test="${not empty categoryMap}">
 						
 						<c:forEach items="${categoryMap}" var="category">
-						<a href="<c:url value='category?name=${category.value}' />">${category.value}</a>
+						<a href="<c:url value='category?id=${category.getKey()}' />">${category.value}</a>
   													
 								
 						</c:forEach>

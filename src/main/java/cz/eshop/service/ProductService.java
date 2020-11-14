@@ -34,9 +34,11 @@ public interface ProductService {
 	 * @param id
 	 * @return loaded Product entity
 	 */
+	
+	
 	public Product loadById(Long id);
 
-	public List<Product> loadByCategory(String categoryName);
+	public List<Product> loadByCategory(Long categoryId);
 
 	public ProductAdminDetailModel editCreateProduct(Long productId);
 

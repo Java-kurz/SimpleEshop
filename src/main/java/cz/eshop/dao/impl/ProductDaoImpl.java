@@ -6,11 +6,13 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import cz.eshop.dao.ProductDao;
 import cz.eshop.entity.Product;
+import cz.eshop.service.CategoryService;
 
 /**
  * Repository layer for db operations with Product entity
@@ -20,6 +22,10 @@ import cz.eshop.entity.Product;
 @Transactional(readOnly = true)
 public class ProductDaoImpl extends GenericDaoImpl<Product> implements ProductDao {
 
+	@Autowired
+	CategoryService categoryService;
+	
+	
 	@Override
 	public List<Product> getList() {
 		final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -49,18 +55,20 @@ public class ProductDaoImpl extends GenericDaoImpl<Product> implements ProductDa
 	}
 
 	@Override
-	public List<Product> loadByCategory(String categoryName) {
-		if (categoryName == null) {
+	public List<Product> loadByCategory(Long categoryId) {
+		if (categoryId == null) {
 			return null;
 		}
 		final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		final CriteriaQuery<Product> crit = criteriaBuilder.createQuery(Product.class);
 		final Root<Product> products = crit.from(Product.class);
 
-		crit.select(products).where(criteriaBuilder.equal(products.get("categoryName"), categoryName));
+		crit.select(products).where(criteriaBuilder.equal(products.get("categoryName"), categoryService.getCategoryMap().get(categoryId)));
 
 		final List<Product> results = findByCriteria(crit);
 		return results;
 	
 	}
+
+
 }

@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,15 +16,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ORDER_CUSTOMER")
+@javax.persistence.Table(name = "ORDER_A")
 public class Order implements Serializable {
 
 	private static final long serialVersionUID = 7085344880847348941L;
 
 	@Id
-	@Column(name = "ORDER_ID")
+	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long orderId;
+	private Long id;
 
 	@Column(name = "NAME")
 	private String name;
@@ -43,16 +44,19 @@ public class Order implements Serializable {
 	@Column(name = "EMAIL")
 	private String email;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "ORDER_ID")
+	/*
+	 * @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	 * @JoinColumn(name = "ORDER_ID")
+	 */
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<OrderItem> orderItems = new HashSet<OrderItem>();
 
-	public Long getOrderId() {
-		return orderId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setOrderId(Long orderId) {
-		this.orderId = orderId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {

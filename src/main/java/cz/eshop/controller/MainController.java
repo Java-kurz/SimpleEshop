@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import cz.eshop.dto.CheckOutModel;
 import cz.eshop.dto.ShoppingCart;
 import cz.eshop.entity.Order;
 import cz.eshop.entity.Product;
 import cz.eshop.service.CategoryService;
+import cz.eshop.service.OrderService;
 import cz.eshop.service.ProductService;
 import cz.eshop.service.ShoppingCartService;
 
@@ -34,20 +36,25 @@ public class MainController {
 	@Autowired
 	CategoryService categoryService;
 
+	@Autowired
+	OrderService orderService;
+	
 	@ModelAttribute("shoppingCart")
 	public ShoppingCart shoppingCart() {
 		return new ShoppingCart();
 	}
-
+	
+	
+	
 	/**
 	 * Method returns main page.
 	 */
 
 	@GetMapping({ "/", "/index", "/category" })
-	public String index(Model model, @RequestParam(value = "name", required = false) String categoryName) {
+	public String index(Model model, @RequestParam(value = "id", required = false) Long categoryId) {
 
-		if (categoryName != null) {
-			List<Product> products = productService.loadByCategory(categoryName);
+		if (categoryId != null) {
+			List<Product> products = productService.loadByCategory(categoryId);
 			model.addAttribute("products", products);
 		} else {
 			List<Product> products = productService.getList();
@@ -60,29 +67,38 @@ public class MainController {
 		return "index";
 	}
 
+	/**
+	 * Method returns product detail.
+	 */
 	@GetMapping("/product_detail")
 	public String productDetail(@RequestParam("id") Long productId,
 			@RequestParam("testParam") Optional<String> testParam, @RequestParam("testParam2") String testParam2,
 			Model model) {
 
+		Product product = productService.loadById(productId);
+		model.addAttribute("product", product);
+		
 		/*
 		 * System.out.println(productId); System.out.println(testParam.isPresent() ?
 		 * testParam.get() : "testParam does not exists");
 		 * System.out.println(testParam2);
 		 */
-
-		Product product = productService.loadById(productId);
-		model.addAttribute("product", product);
-
+		
 		return "product_detail";
 	}
-
+	
+	/**
+	 * Method returns shopping cart.
+	 */
 	@GetMapping("/cart")
 	public String cart(Model model) {
 
 		return "cart";
 	}
-
+	
+	/**
+	 * Method put one product to the shopping cart.
+	 */
 	@GetMapping("/addtocart")
 	public String addToCart(@RequestParam("id") Long productId,
 			@ModelAttribute("shoppingCart") ShoppingCart shoppingCart, Model model) {
@@ -91,7 +107,10 @@ public class MainController {
 
 		return "cart";
 	}
-
+	
+	/**
+	 * Method remove item from the shopping cart.
+	 */
 	@GetMapping("/removefromcart")
 	public String removeFromCart(@RequestParam("id") Long productId,
 			@ModelAttribute("shoppingCart") ShoppingCart shoppingCart, Model model) {
@@ -100,7 +119,10 @@ public class MainController {
 
 		return "cart";
 	}
-
+	
+	/**
+	 * Method reduce the amount in shopping cart by one one.
+	 */
 	@GetMapping("/removeonefromcart")
 	public String removeOneFromCart(@RequestParam("id") Long productId,
 			@ModelAttribute("shoppingCart") ShoppingCart shoppingCart, Model model) {
@@ -109,7 +131,10 @@ public class MainController {
 
 		return "cart";
 	}
-
+	
+	/**
+	 * Method clear shopping cart.
+	 */
 	@GetMapping("/clearcart")
 	public String clearCart(@ModelAttribute("shoppingCart") ShoppingCart shoppingCart, Model model) {
 
@@ -117,20 +142,28 @@ public class MainController {
 
 		return "cart";
 	}
+	
+	/**
+	 * Method prepares and returns create Order form.
+	 */
+	@GetMapping("/orderform")
+	public String orderForm(Model model) {
 
-	@GetMapping("/customer")
-	public String customer(Model model) {
+		model.addAttribute("checkOutModel", orderService.createOrderModel());
 
-		model.addAttribute("checkOutModel", shoppingCartService.createCustomerModel());
-
-		return "customer";
+		return "checkout";
 	}
 
-	@PostMapping(value = "customer_administration")
-	public String createCustomer(@ModelAttribute("checkOutModel") Order order, ShoppingCart shoppingCart, Model model) {
+	/**
+	 * Method handling POST request for updating Order in DB
+	 */
+	@PostMapping(value = "createorder")
+	public String createOrder(@ModelAttribute("checkOutModel") CheckOutModel checkOutModel, ShoppingCart shoppingCart, Model model) {
 
 		
-		shoppingCartService.createCustomer(order, shoppingCart);
+		
+		orderService.createOrder(checkOutModel, shoppingCart);
+		
 			
 			
 		return "cart";

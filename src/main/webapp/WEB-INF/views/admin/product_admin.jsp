@@ -77,19 +77,7 @@
 						<spring:message code="admin.productList.table.th.categoryName" />
 					</label>
 					<div class="col-md-7">
-						
-						<%-- <form:select path="categoryName" id="categoryName" class="form-control input-sm">
-        				<c:forEach items="${categories}" var="category">
-            				<c:choose>
-            					<c:when test= "${category.name eq product.categoryName}">
-            						<option value="${category.name}"selected>${category.name}</option>
-            					</c:when>
-            					<c:otherwise>
-            						<option value="${category.name}">${category.name}</option>
-            					</c:otherwise>
-            				</c:choose>
-        				</c:forEach>
-    					</form:select>  --%>
+												
     					
     					<form:select path="categoryName" id="categoryName" class="form-control input-sm">
         				 

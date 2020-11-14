@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PRODUCT_CATEGORY")
+@javax.persistence.Table(name = "CATEGORY_A")
 public class Category implements Serializable {
 
 	private static final long serialVersionUID = 7085344880847348941L;
@@ -26,14 +26,6 @@ public class Category implements Serializable {
 	@Column(name = "STATUS")
 	private Boolean status;
 
-	public Boolean getStatus() {
-		return status;
-	}
-
-	public void setStatus(Boolean status) {
-		this.status = status;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -41,7 +33,7 @@ public class Category implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
@@ -49,6 +41,13 @@ public class Category implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public Boolean getStatus() {
+		return status;
+	}
 
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
 	
 }

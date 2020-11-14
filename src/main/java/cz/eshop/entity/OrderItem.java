@@ -8,29 +8,33 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import cz.eshop.dto.CheckOutModel;
+
 @Entity
-@Table(name = "orderitems")
+@Table(name = "orderitem")
 public class OrderItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
     @Id
-	@Column(name = "ID")
+    @Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+    
     @Column(name = "QUANTITY")
 	private int quantity;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-	private Order order;
-
-	
+    @Column(name = "PRODUCT_ID")
 	private Long productId;
-    
+   
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ORDER_ID", referencedColumnName = "ID")	
+	private Order order;
+	
     public Long getId() {
 		return id;
 	}
@@ -38,6 +42,10 @@ public class OrderItem implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+    public int getQuantity() {
+        return quantity;
+    }
 
     public Long getProductId() {
 		return productId;
@@ -47,19 +55,16 @@ public class OrderItem implements Serializable {
 		this.productId = productId;
 	}
 
-    public int getQuantity() {
-        return quantity;
-    }
-
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public Order getOrder() {
-        return order;
-    }
+	public Order getOrder() {
+		return order;
+	}
 
-    public void setOrder(Order order) {
-        this.order = order;
-    }
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
 }

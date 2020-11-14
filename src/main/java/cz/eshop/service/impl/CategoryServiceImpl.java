@@ -17,6 +17,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
 	CategoryDao categoryDao;
+	
 
 	public static final Map<Long, String> categoryMap = new HashMap<Long, String>();
 
@@ -47,7 +48,7 @@ public class CategoryServiceImpl implements CategoryService {
 	public Category loadById(Long id) {
 		return categoryDao.loadById(id);
 	}
-
+		
 	@Override
 	public Map<Long, String> getCategoryMap() {
 		if (MapUtils.isEmpty(categoryMap)) {

@@ -83,7 +83,7 @@
 		
 			<a href="<c:url value='clearcart' />" class="btn btn-danger">Vyprázdnit košík</a>
 		
-			<a href="<c:url value='customer' />" class="btn btn-success">Objednat</a>
+			<a href="<c:url value='orderform' />" class="btn btn-success">Objednat</a>
 		
 		
 	</div>
