@@ -52,8 +52,9 @@ public class OrderServiceImpl implements OrderService {
 
 		
 		
-		 /*for (Map.Entry<Long, ShoppingCartItem> entry :
-		  cart.getProductMap().entrySet()) { System.out.println("[Key] : " +entry.getKey() + " [Value] : " + entry.getValue()); }*/
+		 for (Map.Entry<Long, ShoppingCartItem> entry : cart.getProductMap().entrySet()) { 
+			 System.out.println("[Key] : " +entry.getKey() + " [Value] : " + entry.getValue().getName()); 
+			 }
 		 
 		
 
