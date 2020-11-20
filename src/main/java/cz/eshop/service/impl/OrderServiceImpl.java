@@ -7,6 +7,7 @@ import cz.eshop.entity.Order;
 import cz.eshop.entity.OrderItem;
 import cz.eshop.service.OrderService;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public void createOrder(CheckOutModel checkOutModel, ShoppingCart cart) {
-		
+
 		Order order = new Order();
 		order.setName(checkOutModel.getName());
 		order.setStreet(checkOutModel.getStreet());
@@ -38,6 +39,8 @@ public class OrderServiceImpl implements OrderService {
 		order.setPsc(checkOutModel.getPsc());
 		order.setPhone(checkOutModel.getPhone());
 		order.setEmail(checkOutModel.getEmail());
+		order.setStatus(1);
+		
 
 		for (Long id : cart.getProductMap().keySet()) {
 			OrderItem orderItem = new OrderItem();
@@ -47,16 +50,16 @@ public class OrderServiceImpl implements OrderService {
 			orderItem.setOrder(order);
 			order.getOrderItems().add(orderItem);
 			System.out.println();
-			}
+		}
 		orderDao.create(order);
 
-		
-		
-		 for (Map.Entry<Long, ShoppingCartItem> entry : cart.getProductMap().entrySet()) { 
-			 System.out.println("[Key] : " +entry.getKey() + " [Value] : " + entry.getValue().getName()); 
-			 }
-		 
-		
+//		for (Map.Entry<Long, ShoppingCartItem> entry : cart.getProductMap().entrySet()) {
+//			System.out.println("[Key] : " + entry.getKey() + " [Value] : " + entry.getValue().getName());
+//		}
 
+	}
+	
+	public List<Order> getList(){
+		return orderDao.getList();
 	}
 }

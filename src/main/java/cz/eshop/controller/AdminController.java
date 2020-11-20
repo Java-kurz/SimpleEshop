@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import cz.eshop.dto.ActionType;
 import cz.eshop.entity.Category;
 import cz.eshop.entity.Product;
+import cz.eshop.entity.Order;
 import cz.eshop.service.CategoryService;
+import cz.eshop.service.OrderService;
 import cz.eshop.service.ProductService;
 
 @Controller
@@ -26,6 +28,9 @@ public class AdminController {
 
 	@Autowired
 	CategoryService categoryService;
+	
+	@Autowired
+	OrderService orderService;
 
 	/**
 	 * Method loads products and returns Product admin page.
@@ -157,5 +162,16 @@ public class AdminController {
 		return "redirect:categories";
 
 	}
+	
+	@GetMapping(value = "admin/orders")
+	public String orderManagement(@ModelAttribute("category") Category category, Model model) {
+
+		List<Order> orders = orderService.getList();
+		model.addAttribute("orders", orders);
+
+		return ADMIN_PATH_PREFIX + "order_management";
+
+	}
+	
 
 }

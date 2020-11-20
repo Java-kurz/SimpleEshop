@@ -44,8 +44,12 @@ public class Order implements Serializable {
 	@Column(name = "EMAIL")
 	private String email;
 
+	@Column(name = "STATUS")
+	private Integer status;
+
 	/*
 	 * @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	 * 
 	 * @JoinColumn(name = "ORDER_ID")
 	 */
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -105,6 +109,14 @@ public class Order implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 	public Set<OrderItem> getOrderItems() {
