@@ -1,5 +1,12 @@
 package cz.eshop.service.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import cz.eshop.dao.OrderDao;
+import cz.eshop.dao.OrderItemDao;
 import cz.eshop.dto.CheckOutModel;
 import cz.eshop.dto.ShoppingCart;
 import cz.eshop.dto.ShoppingCartItem;
@@ -7,19 +14,14 @@ import cz.eshop.entity.Order;
 import cz.eshop.entity.OrderItem;
 import cz.eshop.service.OrderService;
 
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import cz.eshop.dao.OrderDao;
-
 @Service
 public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	OrderDao orderDao;
+	
+	@Autowired
+	OrderItemDao orderItemDao;
 
 	@Override
 	public CheckOutModel createOrderModel() {
@@ -59,7 +61,26 @@ public class OrderServiceImpl implements OrderService {
 
 	}
 	
+	@Override
+	public void changeOrderStatus(Integer status, Long orderId) {
+		
+		Order order =this.loadById(orderId);
+		order.setStatus(status);
+		
+	}
+	
+	@Override
 	public List<Order> getList(){
 		return orderDao.getList();
+	}
+	
+	@Override
+	public Order loadById(Long id) {
+		return orderDao.loadById(id);
+	}
+	
+	@Override
+	public List<OrderItem> loadByOrderId(Long id){
+		return orderItemDao.loadByOrderId(id);
 	}
 }

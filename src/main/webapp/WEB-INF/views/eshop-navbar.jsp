@@ -8,14 +8,14 @@
 
 <div class="sidenav">
   <a href="<c:url value='index' />"><spring:message code="eshop.menu.index" /></a>
-  <a href="<c:url value='cart' />"><spring:message code="eshop.menu.cart" /></a>
+  
   
   
 			 <c:choose>
 					<c:when test="${not empty categoryMap}">
 						
 						<c:forEach items="${categoryMap}" var="category">
-						<a href="<c:url value='category?id=${category.getKey()}' />">${category.value}</a>
+						<a href="<c:url value='category?id=${category.getKey()}' />">-${category.value}</a>
   													
 								
 						</c:forEach>
@@ -30,5 +30,6 @@
 			
   <a href="#">&nbsp;</a>
   <a href="#">&nbsp;</a>
+  <a href="<c:url value='cart' />"><spring:message code="eshop.menu.cart" /></a>
   <a href="<c:url value='admin/products' />">Admin</a>
 </div>

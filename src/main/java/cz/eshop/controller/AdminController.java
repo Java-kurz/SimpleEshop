@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import cz.eshop.dto.ActionType;
 import cz.eshop.entity.Category;
-import cz.eshop.entity.Product;
 import cz.eshop.entity.Order;
+import cz.eshop.entity.OrderItem;
+import cz.eshop.entity.Product;
 import cz.eshop.service.CategoryService;
 import cz.eshop.service.OrderService;
 import cz.eshop.service.ProductService;
@@ -173,5 +174,29 @@ public class AdminController {
 
 	}
 	
+	@PostMapping(value = "admin/change_order_status")
+	public String changeOrderStatus(@PathVariable("orderId") Long orderId, @PathVariable("status") Integer status) {
+		
+		orderService.changeOrderStatus(status, orderId);
+		
+		return ADMIN_PATH_PREFIX + "order_management";
+	}
+	
+	
+	
+	@GetMapping(value = "admin/order_detail_{id}")
+	public String orderDetail(@PathVariable("id") Long orderId, Model model) {
+
+		Order order = orderService.loadById(orderId);
+		List<OrderItem> orderItems = orderService.loadByOrderId(orderId);
+		List<Product> products = productService.getList();
+	
+		model.addAttribute("order", order);
+		model.addAttribute("orderItems", orderItems);
+		model.addAttribute("products", products);
+		
+		return ADMIN_PATH_PREFIX + "order_detail";
+
+	}
 
 }

@@ -65,10 +65,11 @@
 								<td>
 								
 								
-								<form:form action="order_detail" method="POST" modelAttribute="orders" class="form-horizontal">
-								
-								 <form:select path="orders" items="${order.status}" />
-		    					 
+								<form:form action="change_order_status?orderId=${order.id}&status=${order.status}" method="POST" class="form-horizontal">
+												<form:input type="hidden" path="id" id="id"/>
+												<input type="text"  id="status" class="form-control input-sm" />
+													
+								 	
 		    					<input type="submit" value="<spring:message code="admin.orderList.table.btn.editstatus" />" class="btn btn-success"/> 
 								</form:form>
 								</td>

@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import cz.eshop.dto.CheckOutModel;
-
 @Entity
 @Table(name = "orderitem")
 public class OrderItem implements Serializable {
@@ -31,11 +29,17 @@ public class OrderItem implements Serializable {
     @Column(name = "PRODUCT_ID")
 	private Long productId;
    
+    @Column(name="ORDER_ID", insertable=false, updatable=false)
+    private int orderId;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ORDER_ID", referencedColumnName = "ID")	
 	private Order order;
 	
-    public Long getId() {
+//	LAZY
+//	, referencedColumnName = "ID"
+    
+	
+	public Long getId() {
 		return id;
 	}
 
