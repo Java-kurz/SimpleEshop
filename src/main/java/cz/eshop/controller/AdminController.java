@@ -175,9 +175,11 @@ public class AdminController {
 	}
 	
 	@PostMapping(value = "admin/change_order_status")
-	public String changeOrderStatus(@PathVariable("orderId") Long orderId, @PathVariable("status") Integer status) {
+	public String changeOrderStatus(@ModelAttribute("order") Order order) {
+//		@PathVariable("orderId") Long orderId, @PathVariable("status") Integer status	
+//		orderService.changeOrderStatus(orderId, status);
+		orderService.changeOrderStatus(order.getStatus(), order.getId());
 		
-		orderService.changeOrderStatus(status, orderId);
 		
 		return ADMIN_PATH_PREFIX + "order_management";
 	}

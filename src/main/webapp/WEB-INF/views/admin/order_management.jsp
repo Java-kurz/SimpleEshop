@@ -65,9 +65,12 @@
 								<td>
 								
 								
-								<form:form action="change_order_status?orderId=${order.id}&status=${order.status}" method="POST" class="form-horizontal">
-												<form:input type="hidden" path="id" id="id"/>
-												<input type="text"  id="status" class="form-control input-sm" />
+								<form:form action="change_order_status" method="POST" modelAttribute="${order}" class="form-horizontal">
+										<form:input type="hidden" path="id" id="id"/> 
+										
+										<form:input type="text" path="status" id="status" class="form-control input-sm" />
+												
+											
 													
 								 	
 		    					<input type="submit" value="<spring:message code="admin.orderList.table.btn.editstatus" />" class="btn btn-success"/> 
