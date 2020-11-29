@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import cz.eshop.dao.OrderDao;
+import cz.eshop.entity.Category;
 import cz.eshop.entity.Order;
 import cz.eshop.entity.OrderItem;
 

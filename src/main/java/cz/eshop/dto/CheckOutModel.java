@@ -20,7 +20,7 @@ public class CheckOutModel implements Serializable {
 	private Long phone;
 
 	private String email;
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -76,4 +76,7 @@ public class CheckOutModel implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
+	
 }

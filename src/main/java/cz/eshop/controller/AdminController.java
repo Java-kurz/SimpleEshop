@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import cz.eshop.dto.ActionType;
 import cz.eshop.entity.Category;
@@ -165,7 +166,7 @@ public class AdminController {
 	}
 	
 	@GetMapping(value = "admin/orders")
-	public String orderManagement(@ModelAttribute("category") Category category, Model model) {
+	public String orderManagement(Model model) {
 
 		List<Order> orders = orderService.getList();
 		model.addAttribute("orders", orders);
@@ -174,12 +175,12 @@ public class AdminController {
 
 	}
 	
-	@PostMapping(value = "admin/change_order_status")
-	public String changeOrderStatus(@ModelAttribute("order") Order order) {
-//		@PathVariable("orderId") Long orderId, @PathVariable("status") Integer status	
-//		orderService.changeOrderStatus(orderId, status);
-		orderService.changeOrderStatus(order.getStatus(), order.getId());
-		
+	@GetMapping(value = "admin/change_order_status")
+	public String changeOrderStatus(@RequestParam("id") Long id, @RequestParam("status") Integer status, Model model) {
+				
+		orderService.changeOrderStatus(status, id);
+		List<Order> orders = orderService.getList();
+		model.addAttribute("orders", orders);
 		
 		return ADMIN_PATH_PREFIX + "order_management";
 	}

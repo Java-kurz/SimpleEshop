@@ -31,6 +31,7 @@
 				<tr>
 					<th><spring:message code="admin.orderDetail.table.th.productid" /></th>
 					<th><spring:message code="admin.orderDetail.table.th.productname" /></th>
+					<th><spring:message code="admin.orderDetail.table.th.price" /></th>
 					<th><spring:message code="admin.orderDetail.table.th.count" /></th>
 				</tr>
 			</thead>
@@ -45,6 +46,7 @@
 								<td>${product.name}</td>
 								</c:if>
 							</c:forEach>
+							<td>${orderItem.price}</td>
 							<td>${orderItem.quantity}</td>
 							</tr>
 						</c:forEach>

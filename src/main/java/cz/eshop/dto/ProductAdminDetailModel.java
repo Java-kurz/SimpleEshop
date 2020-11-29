@@ -4,11 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import cz.eshop.entity.Category;
-import cz.eshop.entity.Product;
-import cz.eshop.service.ProductService;
 
 public class ProductAdminDetailModel implements Serializable {
 
@@ -26,14 +22,14 @@ public class ProductAdminDetailModel implements Serializable {
 
 	private String imageUrl;
 
-	private String categoryName;
+	private Long categoryId;
 
-	public String getcategoryName() {
-		return categoryName;
+	public Long getCategoryId() {
+		return categoryId;
 	}
 
-	public void setcategoryName(String categoryName) {
-		this.categoryName = categoryName;
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public BigDecimal getPrice() {

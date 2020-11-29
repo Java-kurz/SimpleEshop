@@ -35,6 +35,7 @@
 				</tr>
 			</thead>
 			<tbody>
+			
 				<c:choose>
 					<c:when test="${not empty orders}">
 						<c:forEach items="${orders}" var="order">
@@ -63,18 +64,19 @@
 									</a>
 								</td>
 								<td>
-								
-								
-								<form:form action="change_order_status" method="POST" modelAttribute="${order}" class="form-horizontal">
-										<form:input type="hidden" path="id" id="id"/> 
-										
-										<form:input type="text" path="status" id="status" class="form-control input-sm" />
-												
-											
-													
-								 	
-		    					<input type="submit" value="<spring:message code="admin.orderList.table.btn.editstatus" />" class="btn btn-success"/> 
-								</form:form>
+									
+									
+									<form action = "change_order_status" method = "GET" >
+								        <input type="hidden" name = "id" value="${order.id}"/>
+								        <select name="status">
+									    	<option value="1" ${order.status == '1' ? 'selected' : ''}>NEZPRACOVÁNA</option>
+									    	<option value="2" ${order.status == '2' ? 'selected' : ''}>PŘIPRAVENA K OSOBNÍMU ODBĚRU</option>
+									    	<option value="3" ${order.status == '3' ? 'selected' : ''}>ČEKÁ NA ZBOŽÍ</option>
+									    	<option value="4" ${order.status == '4' ? 'selected' : ''}>ODESLÁNA</option>
+										</select>
+								         <input type = "submit" value = <spring:message code="admin.orderList.table.btn.editstatus"  /> class="btn btn-primary"/> 
+								    </form>
+						
 								</td>
 								
 							</tr>
@@ -86,7 +88,9 @@
 						</tr>
 					</c:otherwise>
 				</c:choose>
+			
 			</tbody>
+			
 		</table>
 </div>
 

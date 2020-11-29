@@ -49,6 +49,7 @@ public class OrderServiceImpl implements OrderService {
 			ShoppingCartItem shoppingCartItem = cart.getProductMap().get(id);
 			orderItem.setQuantity(shoppingCartItem.getCount());
 			orderItem.setProductId(shoppingCartItem.getId());
+			orderItem.setPrice(shoppingCartItem.getPrice());
 			orderItem.setOrder(order);
 			order.getOrderItems().add(orderItem);
 			System.out.println();
@@ -64,9 +65,14 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void changeOrderStatus(Integer status, Long orderId) {
 		
-		Order order =this.loadById(orderId);
-		order.setStatus(status);
 		
+		Order order = this.loadById(orderId);
+		System.out.println("nový:" +  status);
+		System.out.println("starý:" +  order.getStatus());
+		
+		System.out.println(orderId);
+		order.setStatus(status);
+		orderDao.update(order);
 	}
 	
 	@Override

@@ -1,6 +1,7 @@
 package cz.eshop.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,17 +29,16 @@ public class OrderItem implements Serializable {
     
     @Column(name = "PRODUCT_ID")
 	private Long productId;
+    
+    @Column(name = "PRICE")
+	private BigDecimal price = new BigDecimal(0);
    
     @Column(name="ORDER_ID", insertable=false, updatable=false)
     private int orderId;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ORDER_ID", referencedColumnName = "ID")	
 	private Order order;
-	
-//	LAZY
-//	, referencedColumnName = "ID"
-    
-	
+		
 	public Long getId() {
 		return id;
 	}
@@ -51,6 +51,10 @@ public class OrderItem implements Serializable {
         return quantity;
     }
 
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    
     public Long getProductId() {
 		return productId;
 	}
@@ -59,9 +63,13 @@ public class OrderItem implements Serializable {
 		this.productId = productId;
 	}
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+   	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
 
 	public Order getOrder() {
 		return order;
