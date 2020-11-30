@@ -34,7 +34,7 @@ public class Product implements Serializable {
 	private BigDecimal price = new BigDecimal(0);
 		
 	@Column(name = "CATEGORY")
-	private Long categoryId;
+	private String categoryName;
 	
 	public Long getId() {
 		return id;
@@ -76,13 +76,15 @@ public class Product implements Serializable {
 		this.price = price;
 	}
 
-	public Long getCategoryId() {
-		return categoryId;
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
+
+	
 	
 	
 }

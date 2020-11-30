@@ -77,7 +77,7 @@
 						<spring:message code="admin.productList.table.th.categoryName" />
 					</label>
 					<div class="col-md-7">
-												
+											
     					
     					<form:select path="categoryName" id="categoryName" class="form-control input-sm">
         				 

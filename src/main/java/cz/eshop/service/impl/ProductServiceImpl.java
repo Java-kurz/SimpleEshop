@@ -65,7 +65,7 @@ public class ProductServiceImpl implements ProductService {
 			productAdminDetailModel.setDescription(product.getDescription());
 			productAdminDetailModel.setPrice(product.getPrice());
 			productAdminDetailModel.setImageUrl(product.getImageUrl());
-			productAdminDetailModel.setCategoryId(product.getCategoryId());
+			productAdminDetailModel.setCategoryName(product.getCategoryName());
 		}
 
 		List<Category> categories = categoryService.getList();
