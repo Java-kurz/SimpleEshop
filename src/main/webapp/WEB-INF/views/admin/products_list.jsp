@@ -45,7 +45,11 @@
 								<td>${product.description}</td>
 								<td>${product.imageUrl}</td>
 								<td>${product.price}</td>
-								<td>${product.categoryName}</td>
+								<c:forEach items="${categories}" var="category">
+									<c:if test= "${product.categoryId eq category.id}">
+									<td>${category.name}</td>
+									</c:if>
+								</c:forEach>
 								<td>
 									<a href="<c:url value='edit_product_${product.id}' />" class="btn btn-primary">
 										<spring:message code="admin.productList.table.btn.edit" />

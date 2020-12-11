@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import cz.eshop.dto.CheckOutModel;
 import cz.eshop.dto.ShoppingCart;
-import cz.eshop.entity.Order;
 import cz.eshop.entity.Product;
 import cz.eshop.service.CategoryService;
 import cz.eshop.service.OrderService;
@@ -78,6 +77,9 @@ public class MainController {
 		Product product = productService.loadById(productId);
 		model.addAttribute("product", product);
 		
+		Map<Long, String> categoryMap = categoryService.getCategoryMap();
+		model.addAttribute("categoryMap", categoryMap);
+		
 		/*
 		 * System.out.println(productId); System.out.println(testParam.isPresent() ?
 		 * testParam.get() : "testParam does not exists");
@@ -93,6 +95,9 @@ public class MainController {
 	@GetMapping("/cart")
 	public String cart(Model model) {
 
+		Map<Long, String> categoryMap = categoryService.getCategoryMap();
+		model.addAttribute("categoryMap", categoryMap);
+		
 		return "cart";
 	}
 	
@@ -104,7 +109,9 @@ public class MainController {
 			@ModelAttribute("shoppingCart") ShoppingCart shoppingCart, Model model) {
 
 		shoppingCartService.addToCart(productId, shoppingCart);
-
+		Map<Long, String> categoryMap = categoryService.getCategoryMap();
+		model.addAttribute("categoryMap", categoryMap);
+		
 		return "cart";
 	}
 	
@@ -116,7 +123,9 @@ public class MainController {
 			@ModelAttribute("shoppingCart") ShoppingCart shoppingCart, Model model) {
 
 		shoppingCartService.removeFromCart(productId, shoppingCart);
-
+		Map<Long, String> categoryMap = categoryService.getCategoryMap();
+		model.addAttribute("categoryMap", categoryMap);
+		
 		return "cart";
 	}
 	
@@ -128,7 +137,9 @@ public class MainController {
 			@ModelAttribute("shoppingCart") ShoppingCart shoppingCart, Model model) {
 
 		shoppingCartService.removeOneFromCart(productId, shoppingCart);
-
+		Map<Long, String> categoryMap = categoryService.getCategoryMap();
+		model.addAttribute("categoryMap", categoryMap);
+		
 		return "cart";
 	}
 	
@@ -139,7 +150,9 @@ public class MainController {
 	public String clearCart(@ModelAttribute("shoppingCart") ShoppingCart shoppingCart, Model model) {
 
 		shoppingCartService.clearCart(shoppingCart);
-
+		Map<Long, String> categoryMap = categoryService.getCategoryMap();
+		model.addAttribute("categoryMap", categoryMap);
+		
 		return "cart";
 	}
 	
@@ -150,7 +163,9 @@ public class MainController {
 	public String orderForm(Model model) {
 
 		model.addAttribute("checkOutModel", orderService.createOrderModel());
-
+		Map<Long, String> categoryMap = categoryService.getCategoryMap();
+		model.addAttribute("categoryMap", categoryMap);
+		
 		return "checkout";
 	}
 
@@ -163,7 +178,8 @@ public class MainController {
 		
 		
 		orderService.createOrder(checkOutModel, shoppingCart);
-		
+		Map<Long, String> categoryMap = categoryService.getCategoryMap();
+		model.addAttribute("categoryMap", categoryMap);
 			
 			
 		return "cart";

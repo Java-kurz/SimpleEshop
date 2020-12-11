@@ -73,27 +73,27 @@
 			
 			<div class="row">
 				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="categoryName">
+					<label class="col-md-3 control-lable" for="categoryId">
 						<spring:message code="admin.productList.table.th.categoryName" />
 					</label>
 					<div class="col-md-7">
 											
-    					
-    					<form:select path="categoryName" id="categoryName" class="form-control input-sm">
+     					<form:select path="categoryId" id="categoryId" class="form-control input-sm">
         				 
         				 <c:forEach items="${productAdminDetailModel.categories}" var="category">
+            				
             				<c:choose>
-            					<c:when test= "${category.name eq categoryName}">
-            						<option value="${categoryName}"selected>${categoryName}</option>
+            					<c:when test= "${category.id eq productAdminDetailModel.categoryId}">
+            						<option value="${category.id}"selected>${category.name}</option>
             					</c:when>
             					<c:otherwise>
-            						<option value="${category.name}">${category.name}</option>
+            						<option value="${category.id}">${category.name}</option>
             					</c:otherwise>
             				</c:choose>
+            				            					
         				</c:forEach>
     					</form:select> 
-    					    					    						
-    					
+    				    					
 					</div>
 				</div>
 			</div>

@@ -41,8 +41,10 @@ public class AdminController {
 	public String index(Model model) {
 
 		List<Product> products = productService.getList();
+		List<Category> categories = categoryService.getList();
 		model.addAttribute("products", products);
-
+		model.addAttribute("categories", categories);
+		
 		return ADMIN_PATH_PREFIX + "products_list";
 	}
 

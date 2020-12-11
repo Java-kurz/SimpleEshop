@@ -6,13 +6,12 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import cz.eshop.dao.ProductDao;
 import cz.eshop.entity.Product;
-import cz.eshop.service.CategoryService;
+
 
 /**
  * Repository layer for db operations with Product entity
@@ -22,8 +21,7 @@ import cz.eshop.service.CategoryService;
 @Transactional(readOnly = true)
 public class ProductDaoImpl extends GenericDaoImpl<Product> implements ProductDao {
 
-	@Autowired
-	CategoryService categoryService;
+	
 	
 	
 	@Override
@@ -63,7 +61,7 @@ public class ProductDaoImpl extends GenericDaoImpl<Product> implements ProductDa
 		final CriteriaQuery<Product> crit = criteriaBuilder.createQuery(Product.class);
 		final Root<Product> products = crit.from(Product.class);
 
-		crit.select(products).where(criteriaBuilder.equal(products.get("categoryName"), categoryService.getCategoryMap().get(categoryId)));
+		crit.select(products).where(criteriaBuilder.equal(products.get("categoryId"), categoryId));
 
 		final List<Product> results = findByCriteria(crit);
 		return results;
