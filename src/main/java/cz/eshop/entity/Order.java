@@ -52,7 +52,7 @@ public class Order implements Serializable {
 	 * 
 	 * @JoinColumn(name = "ORDER_ID")
 	 */
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<OrderItem> orderItems = new HashSet<OrderItem>();
 
 	public Long getId() {

@@ -190,14 +190,12 @@ public class AdminController {
 	@GetMapping(value = "admin/order_detail_{id}")
 	public String orderDetail(@PathVariable("id") Long orderId, Model model) {
 
-		Order order = orderService.loadById(orderId);
-		List<OrderItem> orderItems = orderService.loadByOrderId(orderId);
-		List<Product> products = productService.getList();
-	
-		model.addAttribute("order", order);
-		model.addAttribute("orderItems", orderItems);
-		model.addAttribute("products", products);
 		
+		List<Product> products = productService.getList();
+		Order order = orderService.loadById(orderId);
+		model.addAttribute("order", order);
+		model.addAttribute("products", products);
+//		model.addAttribute("orderItems", order.getOrderItems());
 		return ADMIN_PATH_PREFIX + "order_detail";
 
 	}

@@ -36,8 +36,10 @@
 				</tr>
 			</thead>
 			<tbody>
+			<c:set var="orderItems" value="${order.orderItems}"/>
 				<c:choose>
 					<c:when test="${not empty orderItems}">
+					
 						<c:forEach items="${orderItems}" var="orderItem">
 							<tr>
 							<td>${orderItem.productId}</td>
@@ -50,8 +52,8 @@
 							<td>${orderItem.quantity}</td>
 							</tr>
 						</c:forEach>
-					</c:when>					
-				</c:choose> 
+					</c:when>
+					</c:choose>			
 			</tbody>
 		</table>
 		

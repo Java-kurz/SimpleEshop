@@ -33,9 +33,9 @@ public class OrderItem implements Serializable {
     @Column(name = "PRICE")
 	private BigDecimal price = new BigDecimal(0);
    
-    @Column(name="ORDER_ID", insertable=false, updatable=false)
-    private int orderId;
-	@ManyToOne(fetch = FetchType.LAZY)
+//    @Column(name="ORDER_ID", insertable=false, updatable=false)
+//    private int orderId;
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ORDER_ID", referencedColumnName = "ID")	
 	private Order order;
 		
