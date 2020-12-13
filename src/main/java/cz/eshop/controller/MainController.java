@@ -1,5 +1,6 @@
 package cz.eshop.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import cz.eshop.dto.CheckOutModel;
 import cz.eshop.dto.ShoppingCart;
+import cz.eshop.entity.Order;
 import cz.eshop.entity.Product;
 import cz.eshop.service.CategoryService;
 import cz.eshop.service.OrderService;
@@ -51,6 +53,7 @@ public class MainController {
 
 	@GetMapping({ "/", "/index", "/category" })
 	public String index(Model model, @RequestParam(value = "id", required = false) Long categoryId) {
+		
 
 		if (categoryId != null) {
 			List<Product> products = productService.loadByCategory(categoryId);
@@ -183,5 +186,16 @@ public class MainController {
 			
 			
 		return "cart";
+	}
+	
+	@GetMapping(value = "price_filter")
+	public String priceFilter(@RequestParam("min") BigDecimal min, @RequestParam("max") BigDecimal max, Model model) {
+				
+		List<Product> products = productService.priceFilter(min, max);
+		model.addAttribute("products", products);
+		Map<Long, String> categoryMap = categoryService.getCategoryMap();
+		model.addAttribute("categoryMap", categoryMap);
+		
+		return "index";
 	}
 }

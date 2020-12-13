@@ -1,5 +1,6 @@
 package cz.eshop.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,5 +74,10 @@ public class ProductServiceImpl implements ProductService {
 
 		return productAdminDetailModel;
 
+	}
+	
+	@Override
+	public List<Product> priceFilter(BigDecimal min, BigDecimal max){
+		return productDao.priceFilter(min,max);
 	}
 }

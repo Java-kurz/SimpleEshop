@@ -1,5 +1,6 @@
 package cz.eshop.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import cz.eshop.entity.Product;
@@ -25,5 +26,8 @@ public interface ProductDao extends GenericDao<Product> {
 	 * @return loaded Products entities by category
 	 */
 	public List<Product> loadByCategory(Long categoryId);
+	
+	public List<Product> priceFilter(BigDecimal min, BigDecimal max);
+	
 
 }

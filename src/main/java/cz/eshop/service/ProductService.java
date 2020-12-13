@@ -1,5 +1,6 @@
 package cz.eshop.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import cz.eshop.dto.ProductAdminDetailModel;
@@ -35,10 +36,11 @@ public interface ProductService {
 	 * @return loaded Product entity
 	 */
 	
-	
 	public Product loadById(Long id);
 
 	public List<Product> loadByCategory(Long categoryId);
+	
+	public List<Product> priceFilter(BigDecimal min, BigDecimal max);
 
 	public ProductAdminDetailModel editCreateProduct(Long productId);
 

@@ -1,5 +1,6 @@
 package cz.eshop.dao.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -66,6 +67,22 @@ public class ProductDaoImpl extends GenericDaoImpl<Product> implements ProductDa
 		final List<Product> results = findByCriteria(crit);
 		return results;
 	
+	}
+	
+	@Override
+	public List<Product> priceFilter(BigDecimal min, BigDecimal max){
+		
+		if (min == null || max == null) {
+			return null;
+		}
+		final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		final CriteriaQuery<Product> crit = criteriaBuilder.createQuery(Product.class);
+		final Root<Product> products = crit.from(Product.class);
+
+		crit.select(products).where(criteriaBuilder.between(products.get("price"), min, max));
+
+		final List<Product> results = findByCriteria(crit);
+		return results;
 	}
 
 

@@ -22,6 +22,30 @@
 
 	<h2>Tohle je eshop</h2>
 	<hr />
+	
+	<form action = "price_filter" method = "GET" >
+			<label class="col-md-3 control-lable" for="min">
+						<spring:message code="index.filter.min" />
+						<input type = "text" name = "min">
+			</label>
+		
+			<label class="col-md-3 control-lable" for="min">
+						<spring:message code="index.filter.max" />
+						<input type = "text" name = "max" />
+			</label>
+         	
+			
+			
+	<input type = "submit" value = <spring:message code="index.btn.filter"  /> class="btn btn-primary"/>
+	</form>
+	
+<%-- 	<form action = "sort_by" method = "GET" > --%>
+<!-- 			Seřadit podle: 	<select name="status"> -->
+<!-- 					    	<option value="1">Cena</option> -->
+<!-- 							</select> -->
+<!-- 	<input type = "submit" value = <spring:message code="index.btn.filter"  /> class="btn btn-primary"/>  -->
+<%-- 	</form>		 --%>
+	
 	<div class="row">
 		<c:forEach items="${products}" var="product">
 			<div class="column">
